@@ -1,0 +1,87 @@
+// English translation R
+window.ADD_I18N("en", {
+ shirauo:{tip:"Transparent when raw, white when cooked. Not the same as shirasu (baby sardines) or shirouo (ice goby). Lake Tai icefish is one of the lake's \"three whites\".",
+  d:{
+   "银鱼炒蛋":{n:"Scrambled eggs with icefish",h:"Mix icefish into salted beaten eggs, scramble in hot oil until set and sprinkle with scallion.",serves:"2",time:"10 min",
+    ingT:[["Icefish","100 g"],["Eggs","3"],["Scallions","2"]],
+    sauceT:[["Salt","1/2 tsp"],["Shaoxing wine","1 tsp"],["Neutral oil","2 tbsp"]],
+    steps:["Rinse and drain the icefish and blot dry with paper towel.",
+     "Beat the eggs with the salt and wine and mix in the fish and chopped scallion.",
+     "Heat the pan, add the oil and pour in the eggs. When the edges set, push them slowly with a spatula.",
+     "Turn off the heat while the eggs are mostly set but still a little moist."],
+    tips:["Dry the fish well or the eggs will weep.","You can use kamaage shirasu instead; then skip the salt."]},
+   "银鱼蛋花":{n:"Icefish simmered with egg (tamago-toji)",h:"Simmer icefish in dashi, soy sauce and mirin, pour in beaten egg, cover until half set and add mitsuba."},
+   "银鱼羹":{n:"Icefish thick soup",h:"Simmer icefish with diced tofu and shiitake in stock, thicken, swirl in egg and season with pepper."}
+  }},
+ "wuchang-bream":{tip:"Hubei's famous fish: flat-bodied with tender flesh. Almost never seen in Japan.",warn:"Never eat freshwater fish raw.",
+  d:{
+   "清蒸武昌鱼":{n:"Steamed Wuchang bream",h:"Tuck ham and shiitake slices into the cuts, steam 10 minutes on scallion and ginger and finish with chicken stock and hot oil.",serves:"2–3",time:"25 min",
+    ingT:[["Wuchang bream (or another flat fish)","1 (about 600 g)"],["Ham slices (optional)","4"],["Shiitake","3"],["Japanese leek, ginger","to taste"]],
+    sauceT:[["Shaoxing wine","1 tbsp"],["Seasoned soy sauce for fish","2 tbsp"],["Neutral oil","2 tbsp"],["Salt","a pinch"]],
+    steps:["Rinse and pat dry, score both sides, rub with salt and wine and marinate 10 minutes.",
+     "Tuck slices of ham and shiitake alternately into the cuts.",
+     "Lay leek on a plate and add the fish and ginger slices.",
+     "Steam over fully boiling water on high 10 minutes.",
+     "Pour off the liquid, top with shredded leek and pour over hot oil and soy sauce."],
+    tips:["Wuchang bream isn't available in Japan; sea bream is a good substitute.","Steam freshwater fish all the way through."]},
+   "红烧鳊鱼":{n:"Red-braised bream",h:"Fry both sides, then braise with scallion, ginger, garlic, soy sauce, sugar and wine."},
+   "葱烤鳊鱼":{n:"Scallion-braised bream (Shanghai style)",h:"Lay fried fish on a thick bed of scallions, add soy sauce and sugar and cook slowly until the scallions are caramelized."}
+  }},
+ chozame:{tip:"Its roe becomes caviar. The flesh has no small bones and a chicken-like texture. Farmed in China and in Miyazaki, Japan.",
+  d:{
+   "红烧鲟鱼":{n:"Red-braised sturgeon",h:"Blanch and fry pieces, then braise 20 minutes with chili bean paste, soy sauce, sugar and wine.",serves:"3",time:"40 min",
+    ingT:[["Sturgeon pieces","500 g"],["Ginger","4 slices"],["Japanese leek","1 stalk"],["Garlic","4 cloves"]],
+    sauceT:[["Pixian chili bean paste (optional)","1 tbsp"],["Shaoxing wine","2 tbsp"],["Light soy sauce","2 tbsp"],["Dark soy sauce","1 tsp"],["Sugar","1 tbsp"],["Neutral oil","2 tbsp"],["Hot water","400 ml"]],
+    steps:["Pour hot water over the pieces, scrape off the slime, rinse and pat dry.",
+     "Heat the oil and fry the pieces until lightly golden.",
+     "Add the leek, ginger, garlic and bean paste and fry until fragrant.",
+     "Add the wine, both soy sauces, sugar and hot water, cover and simmer on low 20 minutes.",
+     "Uncover and reduce on high."],
+    tips:["Sturgeon has no small bones and firm, chicken-like flesh that won't fall apart even with long cooking.","Farmed in Miyazaki Prefecture and available online."]},
+   "鲟鱼刺身":{n:"Sturgeon sashimi",h:"Miyazaki-farmed sturgeon is mild and springy; slice thin and dip in ponzu."},
+   "俄式烤鲟鱼串":{n:"Sturgeon shashlik",h:"Marinate in lemon, onion and white wine, skewer, grill over charcoal and serve with pomegranate sauce."}
+  }},
+ pangasius:{tip:"A freshwater fish farmed in Vietnam; frozen fillets are cheap and boneless. Chinese supermarkets often sell it as \"long li yu\" (sole), but real sole is a different fish.",
+  d:{
+   "番茄巴沙鱼":{n:"Basa in tomato sauce",h:"Cook tomatoes down, add water, simmer fish pieces 3 minutes and season with salt and sugar. Kid-friendly.",serves:"2",time:"20 min",
+    ingT:[["Basa fillets","300 g"],["Tomatoes","2"],["Enoki (optional)","1/2 pack"],["Garlic","2 cloves"],["Scallion","1"]],
+    sauceT:[["Ketchup","2 tbsp"],["Sugar","1 tsp"],["Salt","1/2 tsp"],["Shaoxing wine","1 tbsp"],["Potato starch","1 tbsp"],["Neutral oil","1 tbsp"],["Water","300 ml"]],
+    steps:["Thaw and pat dry the fillets, cut into 3 cm pieces and toss with wine, a little salt and starch.",
+     "Cut the tomatoes into small pieces.",
+     "Heat the oil, fry the garlic, add the tomatoes and cook 3 minutes until juicy, then add the ketchup and sugar.",
+     "Add the water and enoki and bring to a boil.",
+     "Add the fish and cook on medium 3 minutes until white; season with salt and sprinkle with scallion."],
+    tips:["Basa has no bones, perfect for kids.","Stir as little as possible once the fish is in, or it breaks up."]},
+   "越南黄姜鱼":{n:"Chả cá Lã Vọng (Hanoi turmeric fish)",h:"Marinate fish in turmeric and shrimp paste, fry, then toss with lots of dill and scallion; eat with rice noodles."},
+   "面包糠烤鱼排":{n:"Baked breaded fish fillets",h:"Coat fillets in flour, egg and breadcrumbs and bake at 200°C for 15 minutes."}
+  }},
+ shitabirame:{tip:"A classic fish of French cuisine. Japanese supermarkets occasionally sell it whole and skinned. Chinese \"long li\" fillets are usually basa.",
+  d:{
+   "法式黄油煎鳎鱼":{n:"Sole meunière",h:"Flour whole sole, fry golden in butter and pour over browned butter, lemon juice and parsley.",serves:"2",time:"20 min",
+    ingT:[["Sole (skinned and gutted)","2 (or 2 fillets)"],["Lemon","1/2"],["Parsley","a little"]],
+    sauceT:[["Flour","3 tbsp"],["Salt and pepper","a pinch"],["Butter","30 g"],["Olive oil","1 tbsp"]],
+    steps:["Pat the fish dry, season both sides, dust with flour and shake off the excess.",
+     "Heat the olive oil and 10 g butter on medium until small bubbles form.",
+     "Fry the fish 3 minutes until golden, turn and fry 2–3 more. Plate.",
+     "Wipe the pan, add the remaining 20 g butter and heat on low until light brown and nutty.",
+     "Squeeze in the lemon juice, add chopped parsley and pour immediately over the fish."],
+    tips:["Sole meunière is the most famous fish dish in French cooking.","Watch the browning butter and take it off the heat as soon as it turns brown, or it goes bitter."]},
+   "舌鳎奶油焗":{n:"Japanese yoshoku-style sole",h:"As served in Japanese Western-style restaurants: butter-fried with cream sauce or tartar sauce."},
+   "椒盐龙利":{n:"Salt and pepper sole",h:"Dust fillet pieces lightly and fry, then toss with garlic and chili and sprinkle with pepper salt."}
+  }},
+ ohyou:{tip:"A very large flatfish, usually sold as frozen steaks. Much conveyor-belt-sushi \"engawa\" is Greenland halibut or halibut.",
+  d:{
+   "阿拉斯加香煎比目鱼":{n:"Butter-basted pan-seared halibut",h:"Dry and salt the steaks, sear one side in a hot pan, then turn and baste with butter and herbs.",serves:"2",time:"15 min",
+    ingT:[["Halibut steaks","2 (about 250 g)"],["Lemon","1/2"],["Garlic","1 clove"],["Thyme or rosemary (optional)","1 sprig"]],
+    sauceT:[["Salt, black pepper","a pinch"],["Olive oil","1 tbsp"],["Butter","15 g"]],
+    steps:["Thaw frozen steaks in the fridge, pat completely dry with paper towel and season both sides.",
+     "Heat a frying pan on medium-high, add the olive oil and sear the fish 3 minutes without moving it until golden underneath.",
+     "Turn and add the butter, crushed garlic and herbs.",
+     "When the butter melts and foams, tilt the pan and keep spooning butter over the fish for 2–3 minutes.",
+     "Squeeze over lemon and plate."],
+    tips:["Drying the fish well is the key to a golden crust.","For thick steaks, cover for the last minute."]},
+   "大比目鱼黄油酱油":{n:"Butter-soy halibut",h:"Dust pieces with flour, pan-fry and glaze with butter and soy sauce."},
+   "北欧奶油焗鱼":{n:"Fiskegrateng (Norwegian fish gratin)",h:"Bake fish with creamy white sauce and macaroni, topped with breadcrumbs."},
+   "清蒸比目鱼排":{n:"Steamed halibut steak",h:"Thaw and dry frozen steaks, top with shredded ginger, steam 8 minutes and finish with soy sauce and scallion oil."}
+  }}
+});

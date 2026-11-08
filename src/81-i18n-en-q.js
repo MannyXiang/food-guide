@@ -1,0 +1,86 @@
+// English translation Q
+window.ADD_I18N("en", {
+ tilapia:{tip:"Once sold in Japan as \"izumidai\" or \"chikadai\". Western supermarkets sell cheap, mild frozen fillets.",warn:"Never eat freshwater fish raw.",
+  d:{
+   "豉汁蒸罗非鱼":{n:"Steamed tilapia with black bean sauce",h:"Score, top with fermented black beans, garlic and ginger, steam 10 minutes and pour over scallion oil.",serves:"2–3",time:"25 min",
+    ingT:[["Tilapia (or any white fish)","1 whole (about 500 g) or 300 g fillets"],["Fermented black beans","1.5 tbsp"],["Garlic","3 cloves"],["Ginger","1 small piece"],["Scallions","2"]],
+    sauceT:[["Light soy sauce","1 tbsp"],["Sugar","1/2 tsp"],["Shaoxing wine","1 tbsp"],["Neutral oil","2 tbsp"]],
+    steps:["Rinse and pat dry, score the fish and rub with wine.",
+     "Chop the black beans roughly and mix with minced garlic and ginger, soy sauce, sugar and 1 tbsp oil.",
+     "Put the fish on a plate and cover with the bean sauce.",
+     "Steam over boiling water on high 10 minutes (fillets 6–7).",
+     "Sprinkle with scallion and pour over hot oil."],
+    tips:["Fermented black beans are sold at Chinese grocers and Gyomu Super.","Freshwater fish must be cooked through."]},
+   "泰式炸鱼配青芒":{n:"Pla tod yum mamuang (fried fish with green mango salad)",h:"Fry a whole fish crisp and serve with a salad of shredded green mango, shallot and chili in fish sauce and lime."},
+   "墨西哥炸鱼":{n:"Mojarra frita",h:"Score a whole fish, rub with salt and lime, fry golden and serve with rice, salad and tortillas."}
+  }},
+ namazu:{tip:"Tender flesh with almost no small bones. The skin is slimy; treat it with salt or hot water.",warn:"Never eat freshwater fish raw.",
+  d:{
+   "东北鲶鱼炖茄子":{n:"Northeastern catfish stewed with eggplant",h:"Lightly fry catfish pieces, then stew 20 minutes with eggplant, soybean paste, scallion, ginger and garlic.",serves:"3",time:"40 min",
+    ingT:[["Catfish (or cod pieces)","500 g"],["Eggplants","3"],["Japanese leek","1/2"],["Ginger, garlic","a little each"],["Star anise","1"]],
+    sauceT:[["Soybean paste or miso","2 tbsp"],["Soy sauce","1 tbsp"],["Shaoxing wine","1 tbsp"],["Sugar","1 tsp"],["Neutral oil","3 tbsp"],["Hot water","600 ml"]],
+    steps:["Pour hot water over the catfish and scrape off the slime, cut into pieces and pat dry. Cut the eggplant into chunks.",
+     "Heat the oil, fry the fish briefly and remove.",
+     "Fry the leek, ginger, garlic and star anise until fragrant, add the bean paste and fry 30 seconds.",
+     "Add the eggplant and stir-fry until slightly soft, then the wine, soy sauce, sugar and hot water.",
+     "Return the fish, cover and simmer on medium-low 20 minutes until the sauce is rich."],
+    tips:["A Northeastern saying goes that catfish with eggplant is so good you'll eat till you burst; the eggplant soaks up the fish broth.","If you can't get catfish in Japan, use cod (10 minutes of stewing is enough)."]},
+   "美国南方炸鲶鱼":{n:"Southern fried catfish",h:"Soak fillets in buttermilk, coat in cornmeal and fry; serve with tartar sauce and cornbread."},
+   "越南焦糖焖鱼":{n:"Cá kho tộ (Vietnamese caramel catfish)",h:"Braise catfish in a clay pot with caramel, fish sauce and pepper until the sauce is thick."}
+  }},
+ raigyo:{tip:"Called \"sang yu\" in southern China and often made into restorative soup after surgery. Rarely eaten in Japan.",warn:"Never eat freshwater fish raw.",
+  d:{
+   "生鱼片粥":{n:"Cantonese fish slice congee",h:"Marinate thin fish slices with ginger, oil and salt, cook them in boiling congee and add scallion and pepper.",serves:"2",time:"50 min",
+    ingT:[["Snakehead fillet (or any white fish)","200 g"],["Rice","1/2 cup (about 90 g)"],["Ginger","1 small piece"],["Scallion, cilantro","to taste"]],
+    sauceT:[["Salt","to taste"],["Neutral oil","1 tbsp"],["White pepper","a pinch"],["Water","1.2 L"]],
+    steps:["Wash the rice, mix with 1 tsp oil and a little salt and leave 20 minutes (the congee will be silkier).",
+     "Add the water, bring to a boil, then simmer on low 30–40 minutes, stirring so it doesn't stick.",
+     "Slice the fish thinly and toss with shredded ginger, a little salt and oil.",
+     "When the congee is ready, turn to high, add the fish, separate with chopsticks and cook 1 minute until white; turn off.",
+     "Season with salt and white pepper and top with scallion and cilantro."],
+    tips:["Don't cook the fish long or it toughens.","Freshwater fish must be cooked through; in Japan sea bream or cod is the easiest substitute."]},
+   "黑鱼汤":{n:"Snakehead milky soup",h:"Fry pieces, add boiling water and ginger, boil hard into a white broth and add tofu."},
+   "泰式盐烤黑鱼":{n:"Pla chon pao (Thai salt-crusted grilled snakehead)",h:"Stuff with lemongrass, coat the skin in salt and grill over charcoal; serve with seafood chili sauce. A Thai street classic."}
+  }},
+ turbot:{tip:"Farmed in huge numbers in northern China and usually sold live. A luxury fish in Europe; rare in Japanese markets.",
+  d:{
+   "清蒸多宝鱼":{n:"Steamed turbot",h:"Score the whole fish, top with scallion and ginger, steam 10 minutes and finish with seasoned soy sauce and hot oil.",serves:"2–3",time:"25 min",
+    ingT:[["Turbot","1 (about 600 g, gutted)"],["Japanese leek","1 stalk"],["Ginger","1 piece"]],
+    sauceT:[["Shaoxing wine","1 tbsp"],["Seasoned soy sauce for fish","3 tbsp"],["Neutral oil","3 tbsp"]],
+    steps:["Rinse and pat dry, score a cross on the dark side and rub with wine.",
+     "Lay leek on a plate, place the fish dark side up and add ginger slices.",
+     "Steam over fully boiling water on high 10 minutes.",
+     "Pour off the liquid and top with fresh shredded leek.",
+     "Pour over hot oil, then drizzle with the soy sauce."],
+    tips:["The fin edges are rich in collagen and the tastiest part.","Rare in Japan; flounder or flatfish works instead."]},
+   "巴斯克烤多宝鱼":{n:"Rodaballo a la parrilla (Basque grilled turbot)",h:"Clamp the whole fish in a grill basket over charcoal, basting repeatedly with oil infused with garlic, chili and vinegar."},
+   "法式荷兰酱多宝鱼":{n:"Turbot with hollandaise",h:"Gently poach fillets in milky water and serve with butter-and-yolk hollandaise sauce."}
+  }},
+ "swamp-eel":{tip:"A Chinese saying holds that swamp eel in early summer beats ginseng. Buy live and have it killed on the spot; never eat dead ones.",warn:"Always cook thoroughly; it may carry Gnathostoma parasites.",
+  d:{
+   "干煸鳝段":{n:"Dry-fried swamp eel (Sichuan style)",h:"Dry-fry eel pieces to drive off moisture, then toss with dried chilies, Sichuan peppercorns and celery.",serves:"2",time:"25 min",
+    ingT:[["Swamp eel (killed and boned by the shop)","400 g"],["Celery","2 stalks"],["Dried chilies","10"],["Sichuan peppercorns","1 tsp"],["Ginger, garlic","a little each"]],
+    sauceT:[["Pixian chili bean paste","1 tbsp"],["Shaoxing wine","1 tbsp"],["Soy sauce","1 tsp"],["Sugar","1/2 tsp"],["Neutral oil","3 tbsp"]],
+    steps:["Cut the eel into 5 cm pieces, rub with salt and vinegar to remove the slime, rinse and pat dry. Cut the celery into lengths.",
+     "Heat the oil and stir-fry the eel on medium 5–6 minutes until dry and wrinkled.",
+     "Add the bean paste until the oil turns red, then the ginger, garlic, chilies and peppercorns until fragrant.",
+     "Splash in the wine, add the soy sauce and sugar, add the celery and toss on high 1 minute."],
+    tips:["Only buy freshly killed live eel; dead eel is not safe to eat.","Cook it through completely."]},
+   "响油鳝糊":{n:"Sizzling eel strips (Shanghai)",h:"Stir-fry shredded eel, thicken the sauce, pile minced garlic in the center and pour over sizzling hot oil."},
+   "黄鳝饭":{n:"Swamp eel claypot rice",h:"Marinate eel pieces in ginger and soy sauce and lay them on rice cooking in a clay pot to steam through. Cantonese style."}
+  }},
+ dojo:{tip:"Buy live and keep in clean water for a day or two to purge the mud. Asakusa in Tokyo has old loach hot pot restaurants.",warn:"Must be cooked; may carry Gnathostoma parasites.",
+  d:{
+   "柳川锅":{n:"Yanagawa nabe (loach and egg hot pot)",h:"Simmer butterflied loach and shaved burdock in sweet soy broth, set with egg and sprinkle with sansho.",serves:"2",time:"25 min",
+    ingT:[["Butterflied loach","150 g"],["Burdock","1/2"],["Eggs","2"],["Mitsuba or scallion","a little"]],
+    sauceT:[["Dashi","200 ml"],["Soy sauce","2 tbsp"],["Mirin","2 tbsp"],["Sugar","1 tbsp"],["Sake","1 tbsp"],["Sansho pepper","a pinch"]],
+    steps:["Shave the burdock into thin slivers (or buy pre-cut \"sasagaki gobo\"), soak in water and drain.",
+     "Spread the burdock in a shallow pot and lay the loach on top.",
+     "Pour in the dashi, soy sauce, mirin, sugar and sake and simmer on medium 8 minutes until the loach is cooked.",
+     "Pour in the beaten eggs, cover for 1 minute and turn off when the eggs are half set.",
+     "Top with mitsuba and sprinkle with sansho."],
+    tips:["An old Asakusa flavor; supermarkets occasionally sell butterflied loach (開きどじょう).","Loach must be cooked through."]},
+   "泥鳅汤":{n:"Chueotang (Korean loach soup)",h:"Boil loach until soft, mash and sieve, then simmer into a thick soup with dried cabbage, soybean paste and chili; sprinkle with sansho."},
+   "泥鳅钻豆腐":{n:"Loach and tofu soup",h:"Put loach and tofu in cold water together, heat slowly, then simmer into soup with ginger and scallion."}
+  }}
+});

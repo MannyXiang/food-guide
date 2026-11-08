@@ -1,0 +1,88 @@
+// English translation S
+window.ADD_I18N("en", {
+ "yellow-catfish":{tip:"A small freshwater fish common in Sichuan, Jiangsu and Zhejiang, tender and free of small bones. Careful: the dorsal and pectoral fins have spines.",warn:"Never eat freshwater fish raw.",
+  d:{
+   "藿香黄辣丁":{n:"Sichuan yellow catfish with Korean mint (huoxiang)",h:"Fry pickled chilies, pickled ginger and chili bean paste, add water, poach the fish and finish with fresh huoxiang.",serves:"2–3",time:"30 min",
+    ingT:[["Yellow catfish","500 g (about 8–10 fish)"],["Pickled chilies","6"],["Pickled ginger","1 piece"],["Garlic","4 cloves"],["Fresh huoxiang (Korean mint) or shiso","1 bunch"]],
+    sauceT:[["Pixian chili bean paste","1.5 tbsp"],["Sichuan peppercorns","1 tsp"],["Shaoxing wine","1 tbsp"],["Sugar","1 tsp"],["Neutral oil","3 tbsp"],["Hot water","600 ml"]],
+    steps:["Gut the fish, rub with salt to remove the slime and rinse. Mind the spines on the dorsal and pectoral fins.",
+     "Chop the pickled chilies, pickled ginger and garlic; chop the huoxiang.",
+     "Heat the oil and fry the bean paste until red, then add the chilies, ginger, garlic and peppercorns until fragrant.",
+     "Add the hot water, wine and sugar, bring to a boil, add the fish and cook on medium 8 minutes.",
+     "Just before turning off the heat, scatter plenty of chopped huoxiang over the top."],
+    tips:["No huoxiang in Japan? Shiso is a good stand-in: different aroma, still delicious.","The spines really hurt; wear gloves when cleaning."]},
+   "昂刺鱼汤":{n:"Yellow catfish and tofu milky soup (Jiangsu)",h:"Fry the fish briefly, add boiling water and cook into a milky broth; add tofu and salt."},
+   "酸菜黄辣丁":{n:"Yellow catfish with pickled greens",h:"Fry pickled mustard greens, simmer in water for a sour broth, cook the fish 8 minutes and add Sichuan pepper."}
+  }},
+ "black-carp":{tip:"The largest of China's \"four domestic fish\"; it feeds on snails, so the flesh is thick. Note: Japanese \"aozakana\" means blue-backed fish, not this one.",warn:"Never eat freshwater fish raw. The gallbladder is poisonous; never eat it.",
+  d:{
+   "上海熏鱼":{n:"Shanghai \"smoked\" fish (bao yu)",h:"Marinate thick slices, deep-fry until dry, then soak hot in a sauce of soy sauce, sugar and five spices.",serves:"4",time:"50 min",
+    ingT:[["Black carp or grass carp middle section (or mackerel / yellowtail)","600 g"],["Ginger","1 piece"],["Japanese leek","1 stalk"],["Star anise, cinnamon stick","1 each"]],
+    sauceT:[["Light soy sauce","4 tbsp"],["Dark soy sauce","1 tbsp"],["Shaoxing wine","3 tbsp"],["Sugar","5 tbsp"],["Vinegar","1 tbsp"],["Water","200 ml"],["Frying oil","4 cm deep"]],
+    steps:["Cut the fish into 1.5 cm slices, marinate 1 hour with 2 tbsp light soy sauce, 1 tbsp wine, leek and ginger, then pat dry.",
+     "In another pot, simmer the remaining soy sauces, wine, sugar, vinegar, water, star anise and cinnamon on low 10 minutes for the sauce; let cool.",
+     "Heat the oil to 180°C and fry the fish in batches 5–6 minutes until the surface is dry, firm and deep golden.",
+     "While hot, soak the slices in the sauce 5 minutes, turning so both sides absorb it.",
+     "Lift out and plate. Good warm or cold."],
+    tips:["An intermediate dish: fry the fish dry enough and after soaking it'll be chewy outside and tender within.","In Japan, mackerel or yellowtail work well and are even richer.","Keeps 3–4 days sealed in the fridge."]},
+   "青鱼秃肺":{n:"Braised black carp liver",h:"Only the liver of the black carp, red-braised with soy sauce and sugar. A signature of old Shanghai restaurants."},
+   "青鱼干":{n:"Dried black carp",h:"A Jiangnan New Year food: salted and air-dried, then cut and steamed; enjoyed with Shaoxing wine."}
+  }},
+ hamaguri:{tip:"Hamaguri soup is eaten for Japan's Girls' Day (March 3). Purge in salt water like Manila clams.",
+  d:{
+   "文蛤清汤":{n:"Clear hamaguri soup (ushio-jiru)",h:"Start the clams in cold water with kombu, cook until they open and season with only salt and a little light soy sauce; add mitsuba.",serves:"2",time:"15 min (plus 2 hours purging)",
+    ingT:[["Hard clams","6 (about 300 g)"],["Kombu","one 5 cm piece"],["Mitsuba or scallion","a little"]],
+    sauceT:[["Water","500 ml"],["Sake","1 tbsp"],["Salt","1/3 tsp"],["Light soy sauce","a few drops"]],
+    steps:["Soak the clams in 3% salt water somewhere dark for 2–3 hours to purge, then rub the shells together to clean.",
+     "Put the water, kombu and clams in a pot and heat from cold on medium.",
+     "Just before boiling remove the kombu and skim.",
+     "As soon as the clams open, turn off the heat and add the sake, salt and a few drops of light soy sauce.",
+     "Ladle into bowls and add mitsuba."],
+    tips:["Starting in cold water draws the clams' flavor fully into the broth.","Turn off the heat as soon as they open; overcooked clams toughen.","A traditional soup for Japan's Girls' Day (March 3)."]},
+   "烤文蛤":{n:"Grilled hamaguri (yaki-hamaguri)",h:"Cut the hinge ligament (so they don't flip), grill over charcoal until open and add a few drops of soy sauce. A specialty of Kuwana, Mie."},
+   "文蛤蒸蛋":{n:"Chinese steamed egg with clams",h:"Blanch clams until open, arrange in a bowl, pour in beaten egg with the clam liquor and steam 10 minutes."}
+  }},
+ shijimi:{tip:"In Japan shijimi soup is said to be good for the liver and hangovers. Freezing them before cooking boosts the savory flavor (ornithine).",
+  d:{
+   "蚬味噌汤":{n:"Shijimi miso soup",h:"Start purged clams in cold water; when they open, turn off the heat and dissolve miso (red miso is common).",serves:"2",time:"10 min (plus 1 hour purging)",
+    ingT:[["Shijimi clams","200 g"],["Scallion","1"]],
+    sauceT:[["Water","400 ml"],["Miso (red miso suits best)","1.5 tbsp"],["Sake","1 tsp"]],
+    steps:["Soak the clams 1 hour in 1% salt water to purge (they're freshwater clams, so keep the brine weak), then scrub the shells.",
+     "Put the water and clams in a pot, heat from cold on medium and skim.",
+     "When all have opened, lower the heat, add the sake and dissolve the miso in a ladle.",
+     "Don't let it boil again; sprinkle with scallion and serve."],
+    tips:["Freezing purged shijimi before cooking increases their savory compounds.","Don't boil hard after adding miso or the aroma fades."]},
+   "台式腌蚬仔":{n:"Taiwanese soy-marinated clams",h:"Scald until just open and marinate overnight in soy sauce, garlic, chili, rice wine and sugar."},
+   "蚬子汤":{n:"Jaecheop-guk (Korean clam soup)",h:"Busan / Hadong style: clear clam soup with garlic chives, seasoned only with salt."}
+  }},
+ awabi:{tip:"A luxury summer ingredient in Japan. \"Tokobushi\" is a small abalone relative and much cheaper. Scrub off the black slime with salt and a brush.",
+  d:{
+   "酒蒸鲍鱼":{n:"Sake-steamed abalone",h:"Splash abalone in the shell with sake, salt and steam 30+ minutes until tender; serve with liver sauce.",serves:"2",time:"40 min",
+    ingT:[["Abalone (or small tokobushi)","2"],["Kombu","10 cm"]],
+    sauceT:[["Sake","100 ml"],["Salt","as needed (for scrubbing)"],["Soy sauce","a little"]],
+    steps:["Scrub the abalone flesh (the black slimy surface) hard with a brush and salt, then rinse.",
+     "Slide a spoon in from the thin side of the shell to free the meat (or steam it in the shell).",
+     "Lay kombu in a heatproof dish, add the abalone, pour over the sake and cover with plastic wrap or foil.",
+     "Steam over boiling water for at least 30 minutes (longer is softer, up to 1 hour).",
+     "Slice and drizzle with some of the steaming liquid and a few drops of soy sauce. The green liver alongside is edible too."],
+    tips:["Too little steaming leaves it tough; 30 minutes is the minimum.","Tokobushi is a small, much cheaper abalone; good for practice."]},
+   "鲍鱼水贝":{n:"Mizugai (abalone in chilled salt water)",h:"Cube raw abalone and float it in iced salt water with cucumber. Crunchy and refreshing."},
+   "鲍鱼粥":{n:"Jeonbok-juk (abalone porridge)",h:"Slice the abalone, mash the liver, stir-fry with soaked rice in sesame oil, add water and cook into green porridge. A Jeju specialty."},
+   "蚝油鲍鱼":{n:"Braised abalone in oyster sauce",h:"Score and blanch abalone, braise with oyster sauce, soy sauce and sugar, thicken and serve with broccoli."}
+  }},
+ sazae:{tip:"A classic of Japanese seaside barbecues. The green liver at the tip is slightly bitter, a treat for those who love it.",
+  d:{
+   "壶烧蝾螺":{n:"Tsuboyaki (turban shell grilled in its shell)",h:"Grill whole; when it bubbles, pour soy sauce and sake into the opening, grill 5 minutes and twist the meat out with a skewer.",serves:"2",time:"20 min",
+    ingT:[["Turban shells","4"]],
+    sauceT:[["Soy sauce","4 tsp"],["Sake","4 tsp"]],
+    steps:["Scrub the shells with a brush.",
+     "Set them opening up on a grill rack or frying pan so they stay level (a ring of scrunched foil helps).",
+     "Grill on medium 5 minutes, until the opening starts bubbling.",
+     "Pour 1 tsp each of soy sauce and sake into each opening and grill 3–5 more minutes.",
+     "Spear the meat with a skewer or fork and twist it out, eating it with the liver at the tip."],
+    tips:["The green liver at the tip is slightly bitter; fans love it most.","A toaster oven on foil for 10 minutes also works."]},
+   "蝾螺刺身":{n:"Turban shell sashimi",h:"Remove the meat and slice thin; crunchy, with wasabi and soy sauce."},
+   "蝾螺炊饭":{n:"Sazae rice",h:"Slice the meat and cook with rice, dashi, soy sauce and sake."},
+   "白灼海螺":{n:"Chinese boiled sea snails",h:"Boil 10 minutes in water with ginger and wine, pick out the meat with a toothpick and dip in ginger vinegar or wasabi soy."}
+  }}
+});

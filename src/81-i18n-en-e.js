@@ -1,0 +1,68 @@
+// English translation E
+window.ADD_I18N("en", {
+ "pork-belly":{tip:"\"Buta-bara usugiri\" is thinly sliced (stir-fries, hot pot); \"block\" is a whole piece for braising.",
+  d:{
+   "红烧肉":{n:"Red-braised pork belly (hong shao rou)",h:"Blanch cubes, coat in caramel, then simmer an hour with Shaoxing wine, light and dark soy sauce, star anise and hot water and reduce.",serves:"3–4",time:"1 hr 20 min",
+    ingT:[["Skin-on pork belly block","500 g"],["Ginger","3 slices"],["Japanese leek","1 stalk"],["Star anise","2"]],
+    sauceT:[["Rock sugar or sugar","30 g"],["Shaoxing wine","3 tbsp"],["Light soy sauce","2 tbsp"],["Dark soy sauce","1 tbsp"],["Neutral oil","1 tbsp"],["Hot water","about 500 ml"]],
+    steps:["Cut the pork into 3 cm cubes. Put in cold water with 2 ginger slices and 1 tbsp wine, bring to a boil, cook 3 minutes, then rinse off the scum in warm water.",
+     "Put a little oil and the sugar in the pot and heat slowly on low until it melts, turns amber and bubbles finely (2–3 minutes).",
+     "Immediately add the pork and toss quickly so every piece is coated in caramel.",
+     "Add the ginger, leek and star anise, stir until fragrant, splash the wine around the edge and add both soy sauces.",
+     "Pour in hot water to cover, bring to a boil, then cover and simmer on low for 50–60 minutes, checking the water halfway.",
+     "When a chopstick slides easily through the skin, uncover and reduce on high, stirring, until the sauce is thick and clings to the pork."],
+    tips:["The caramel is the step most likely to go wrong: keep the heat low and add the pork as soon as it's amber. A few seconds late and it turns bitter.","If you're worried, skip the caramel and just add the sugar with the soy sauce. Paler, but just as tasty.","Always add hot water; cold water makes the meat tough."]},
+   "冲绳炖猪肉":{n:"Rafute (Okinawan braised pork)",h:"Boil the block, then simmer slowly for 2 hours with awamori, brown sugar and soy sauce."},
+   "韩式烤五花":{n:"Samgyeopsal",h:"Grill thick slices plain and wrap in lettuce with garlic and ssamjang."},
+   "菲律宾脆皮五花":{n:"Lechon kawali",h:"Boil until tender, dry, then deep-fry until the skin blisters and crackles; dip in vinegar sauce."}
+  }},
+ "chicken-thigh":{tip:"Japanese supermarkets mostly sell boneless thigh (もも). It's juicier and more tender than breast (むね).",
+  d:{
+   "照烧鸡":{n:"Chicken teriyaki",h:"Fry skin side down until crisp, turn and glaze with soy sauce, mirin, sake and sugar.",serves:"2",time:"20 min",
+    ingT:[["Boneless chicken thigh","1 (about 300 g)"],["Shredded cabbage or lettuce","to taste"]],
+    sauceT:[["Soy sauce","2 tbsp"],["Mirin","2 tbsp"],["Sake","2 tbsp"],["Sugar","1 tsp"],["Neutral oil","1 tsp"]],
+    steps:["Trim off excess yellow fat and make a few cuts in the thick parts so it's even. Prick the skin with a fork so it doesn't shrink.",
+     "Mix the soy sauce, mirin, sake and sugar in a bowl.",
+     "Put a little oil in a cold frying pan, lay the chicken skin side down and turn on medium heat.",
+     "Press it down with a spatula and cook 6–7 minutes until the skin is golden and crisp.",
+     "Turn, cover and cook on low for 4 minutes.",
+     "Wipe out the fat with paper towel, add the sauce and simmer on medium until thick, spooning it over the chicken.",
+     "Slice, plate and pour over the sauce from the pan."],
+    tips:["Starting skin side down in a cold pan renders the fat slowly for the crispiest skin.","To check doneness, pierce the thickest part: clear juices mean it's done; if pink, cover a little longer.","Wipe out the fat before adding the sauce so it clings."]},
+   "日式炸鸡":{n:"Karaage (Japanese fried chicken)",h:"Marinate pieces in soy sauce, ginger, garlic and sake for 30 minutes, coat in starch and fry twice."},
+   "三杯鸡":{n:"Three-cup chicken (san bei ji)",h:"Fry ginger and garlic in sesame oil, add chicken and cook down with a cup each of rice wine, soy sauce and sugar; finish with Thai basil."},
+   "海南鸡饭":{n:"Hainanese chicken rice",h:"Poach the chicken and chill in ice water, cook rice in the stock with ginger and garlic, serve with chili sauce and ginger paste."}
+  }},
+ beef:{tip:"\"Wagyu\" is a breed; \"kokusan-gyu\" just means raised in Japan. \"Kiri-otoshi\" are thin offcuts, great for stir-fries and simmering.",
+  d:{
+   "牛肉盖饭":{n:"Beef rice bowl (gyudon)",h:"Simmer onion and thin beef in dashi, soy sauce, mirin and sugar for 5 minutes and spoon over rice.",serves:"2",time:"20 min",
+    ingT:[["Thinly sliced beef","200 g"],["Onion","1"],["Hot cooked rice","2 large bowls"],["Red pickled ginger (optional)","to taste"]],
+    sauceT:[["Water","150 ml"],["Dashi granules","1/2 tsp"],["Soy sauce","3 tbsp"],["Mirin","2 tbsp"],["Sake","2 tbsp"],["Sugar","1 tbsp"]],
+    steps:["Slice the onion 5 mm wide along the grain (it holds its shape when simmered).",
+     "Bring the water, dashi, soy sauce, mirin, sake and sugar to a boil over medium heat.",
+     "Add the onion and simmer 4–5 minutes until soft and translucent.",
+     "Add the beef a slice at a time, separating it with chopsticks.",
+     "Skim off the scum and simmer on low 2–3 more minutes.",
+     "Fill bowls with rice, top with beef and onion, pour over some broth and add pickled ginger. An onsen egg or raw yolk is great on top."],
+    tips:["Don't simmer the beef too long or it toughens.","Extra broth (\"tsuyudaku\") makes it even better.","Make it with pork slices and it's butadon."]},
+   "寿喜烧":{n:"Sukiyaki",h:"Grease an iron pot with beef fat, sear thin beef, add warishita (soy sauce, sugar, mirin), then tofu and vegetables; dip in raw egg."},
+   "韩式烤牛肉":{n:"Bulgogi",h:"Marinate thin beef 1 hour in soy sauce, grated pear, sugar, garlic and sesame oil, then stir-fry with onion."},
+   "红酒炖牛肉":{n:"Bœuf bourguignon",h:"Brown beef chunks and braise 3 hours with bacon, onions, mushrooms and red wine."}
+  }},
+ lamb:{tip:"\"Lamb\" (ラム) is under one year old and milder; \"mutton\" (マトン) is from older sheep. Most popular in Hokkaido.",
+  d:{
+   "葱爆羊肉":{n:"Lamb and leek stir-fry (cong bao yang rou)",h:"Marinate lamb in soy sauce and wine, stir-fry over fierce heat with leek and finish with a splash of vinegar.",serves:"2",time:"15 min",
+    ingT:[["Thinly sliced lamb (hot pot slices are fine)","250 g"],["Japanese leek","1.5 stalks"],["Garlic","2 cloves"],["Cilantro (optional)","1 sprig"]],
+    sauceT:[["Soy sauce","1.5 tbsp"],["Shaoxing wine","1 tbsp"],["Potato starch","1 tsp"],["Sugar","1/2 tsp"],["Vinegar","1 tsp"],["Sesame oil","1 tsp"],["Ground cumin (optional)","a pinch"],["Neutral oil","2 tbsp"]],
+    steps:["Mix the lamb with 1 tbsp soy sauce, the wine and starch and marinate 10 minutes.",
+     "Cut the leek on the diagonal or into thick strips and slice the garlic.",
+     "Heat the pan until smoking, add the oil and stir-fry the lamb on high, separating it quickly; take it out as soon as it changes color (about 1 minute).",
+     "In the remaining oil, fry the garlic and leek for 30 seconds until the leek softens slightly.",
+     "Return the lamb, add the rest of the soy sauce and the sugar and toss on high for 30 seconds.",
+     "Splash the vinegar around the edge of the pan, drizzle with sesame oil, sprinkle cumin and cilantro and serve."],
+    tips:["Keep the heat high and move fast so the lamb stays tender and not gamey.","Pouring the vinegar on the hot pan edge burns off the sourness and leaves the aroma.","Lamb (ラム) is milder than mutton (マトン); beginners should start with lamb."]},
+   "成吉思汗烤肉":{n:"Jingisukan (Genghis Khan grill)",h:"Grill lamb on a domed iron pan with bean sprouts, onion and green pepper around it; dip in the special sauce."},
+   "新疆羊肉串":{n:"Xinjiang lamb skewers",h:"Thread lamb cubes on skewers, grill and sprinkle with cumin, chili powder and salt."},
+   "希腊烤羊腿":{n:"Kleftiko",h:"Wrap lamb with potatoes, lemon, garlic and oregano tightly in baking paper and roast low for 3 hours."}
+  }}
+});

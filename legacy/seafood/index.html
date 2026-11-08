@@ -1,0 +1,277 @@
+<title>海鲜图鉴</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap">
+<style>
+/* Layout: one column "fish counter" — search bar on ice, then a market-tag style result card */
+:root{
+  --bg:#eef3f4;         /* crushed ice */
+  --surface:#ffffff;
+  --ink:#14262e;        /* deep water */
+  --muted:#5b6f77;
+  --line:#d3dfe2;
+  --accent:#d2562d;     /* market price-tag red-orange */
+  --accent-ink:#ffffff;
+  --sea:#1f6f7a;        /* teal for tags */
+  --sea-soft:#e1eff0;
+  --warn:#9a6a00;
+  --f-display:"Shippori Mincho","Noto Serif SC","Songti SC",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Hiragino Sans","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d1a1f;--surface:#13252c;--ink:#e6eff1;--muted:#93a9b0;--line:#25404a;
+  --accent:#ee7a52;--accent-ink:#1a0d07;--sea:#6cc3cc;--sea-soft:#183840;--warn:#e0b44c;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1a1f;--surface:#13252c;--ink:#e6eff1;--muted:#93a9b0;--line:#25404a;
+  --accent:#ee7a52;--accent-ink:#1a0d07;--sea:#6cc3cc;--sea-soft:#183840;--warn:#e0b44c;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 64px;display:flex;flex-direction:column;gap:22px}
+header h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,6vw,42px);line-height:1.15;margin:0;letter-spacing:.02em;text-wrap:balance}
+header h1 .ja{font-size:.5em;color:var(--muted);font-weight:600;margin-left:.5em;letter-spacing:.1em}
+header p{margin:6px 0 0;color:var(--muted);max-width:60ch}
+
+/* input panel */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row input[type=text]{flex:1 1 220px;min-width:0;font:inherit;padding:11px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer;border-radius:10px;padding:11px 18px;border:1px solid transparent}
+.btn-primary{background:var(--accent);color:var(--accent-ink);font-weight:700}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button:disabled{opacity:.5;cursor:default}
+button:focus-visible,input:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.or{font-size:12px;color:var(--muted);letter-spacing:.12em;text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--sea-soft);color:var(--sea);border:0}
+.status{font-size:14px;color:var(--muted);min-height:1.4em;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.status.err{color:var(--accent)}
+.status button{padding:4px 12px;font-size:13px}
+
+/* result card — styled like a fish-market price tag */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.tag{padding:20px 20px 18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.tag .ribbon{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font-size:12px;letter-spacing:.06em;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.example{border-color:var(--warn);color:var(--warn)}
+.pill.conf-高{border-color:var(--sea);color:var(--sea)}
+.pill.conf-低{border-color:var(--accent);color:var(--accent)}
+.tag .latin{font-family:var(--f-mono);font-style:italic;color:var(--muted);font-size:13px}
+.tri{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px;min-width:0}
+.tri .ln{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0}
+.tri .k{font-size:11px;letter-spacing:.1em;color:var(--muted);width:3.6em;flex:none;white-space:nowrap}
+.tri .w{font-family:var(--f-display);font-weight:800;line-height:1.2;overflow-wrap:anywhere;min-width:0}
+.tri .zh .w{font-size:clamp(28px,7vw,38px)}
+.tri .ja .w,.tri .en .w{font-size:clamp(20px,5vw,26px)}
+.tri .en .w{font-family:var(--f-body);font-weight:700}
+.tri .kana{color:var(--muted);font-size:14px}
+.copy{background:none;border:0;padding:0;color:var(--sea);font-size:12px}
+.aka{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.body{padding:18px 20px;display:flex;flex-direction:column;gap:18px}
+.body h3{font-family:var(--f-display);font-size:19px;margin:0 0 6px;font-weight:800}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.fact{background:var(--bg);border-radius:10px;padding:10px 12px}
+.fact .lab{font-size:12px;color:var(--muted)}
+ul.tips{margin:0;padding-left:1.2em}
+.dishes{display:flex;flex-direction:column;gap:12px}
+details.dish{border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+details.dish summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+details.dish summary::-webkit-details-marker{display:none}
+details.dish summary::before{content:"＋";color:var(--accent);font-weight:700}
+details.dish[open] summary::before{content:"－"}
+.dish .dn{font-weight:700;font-size:16px}
+.dish .dj{color:var(--muted);font-size:13px}
+.dish .rg{font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--accent);border-radius:4px;padding:1px 7px;letter-spacing:.04em}
+.regions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.regions .chip[aria-pressed="true"]{background:var(--sea);color:var(--bg)}
+.dish .meta{margin-left:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.dish .inner{padding:0 16px 14px 36px;display:flex;flex-direction:column;gap:8px}
+.dish ol{margin:0;padding-left:1.2em}
+.dish .ing{font-size:14px;color:var(--muted)}
+.dish .tip{font-size:14px;background:var(--sea-soft);color:var(--ink);border-radius:8px;padding:8px 10px}
+.alts{font-size:14px;color:var(--muted)}
+.alts button{background:none;border:0;padding:0 2px;color:var(--sea);text-decoration:underline;font-size:14px}
+.history{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:13px;color:var(--muted)}
+footer{font-size:12px;color:var(--muted)}
+.notfound{padding:20px}
+@media (prefers-reduced-motion:no-preference){.card{animation:rise .35s ease-out}}
+@keyframes rise{from{transform:translateY(6px)}to{transform:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>海鲜图鉴<span class="ja">さかな図鑑</span></h1>
+    <p>输入任何语言的名字，查它的中文、日文、英文叫法，以及各个国家和地区的常见做法。</p>
+  </header>
+
+  <section class="panel" aria-label="查询">
+    <form class="row" id="form">
+      <input type="text" id="q" placeholder="输入名字，如：鰤、帝王蟹、mackerel、ホタテ" autocomplete="off">
+      <button class="btn-primary" id="go" type="submit">查询</button>
+      <button class="btn-ghost" id="stop" type="button" hidden>停止</button>
+    </form>
+    <div class="chips" aria-label="试试看">
+      <button class="chip" type="button">三文鱼</button>
+      <button class="chip" type="button">鰆</button>
+      <button class="chip" type="button">ホッキ貝</button>
+      <button class="chip" type="button">Monkfish</button>
+      <button class="chip" type="button">皮皮虾</button>
+      <button class="chip" type="button">ズワイガニ</button>
+    </div>
+    <div class="status" id="status" role="status"></div>
+    <div class="history" id="history" hidden></div>
+  </section>
+
+  <section id="result" aria-live="polite"></section>
+
+  <footer>内容由 Claude 生成，可能有误。生食、贝类与河豚等请以正规渠道和专业处理为准。</footer>
+</div>
+
+<script>
+const EXAMPLE = {
+  found:true,
+  names:{zh:"真鲷", zh_alias:["加吉鱼","红加吉","日本真鲷"], ja:"真鯛", ja_kana:"マダイ", en:"Red sea bream", en_alias:["Japanese sea bream"], latin:"Pagrus major"},
+  category:"鱼类 · 鲷科",
+  summary:"东亚最常见的喜庆鱼，肉质白嫩、脂肪适中、味道清甜，生熟皆宜。日本、韩国、中国沿海都很常吃；地中海的金头鲷（Orata）是近亲，做法可以通用。",
+  season:"冬至春（3–4 月最肥美）",
+  taste:"白身鱼，清甜细腻，鱼皮有胶质",
+  buying:["眼睛清亮饱满不浑浊","鳃鲜红，没有异味","按压鱼身有弹性、能回弹"],
+  alternatives:[{zh:"黄鳍鲷",ja:"キチヌ",en:"Yellowfin seabream"},{zh:"金头鲷",ja:"ヨーロッパヘダイ",en:"Gilt-head bream"}],
+  dishes:[
+    {region:"日本",zh:"鲷鱼饭",local:"鯛めし",ja:"鯛めし",time:"60 分钟",level:"简单",ingredients:["真鲷 1 条（或鱼块 300g）","大米 2 合","昆布 5cm","酱油、清酒各 1 大匙，盐少许","姜丝、葱花"],steps:["鱼抹盐静置 15 分钟，擦干后烤至表面金黄。","米洗净，加昆布、酱油、清酒和适量水。","把烤好的鱼放在米上，正常煮饭。","焖 10 分钟后拣出鱼骨，把鱼肉拌入饭中，撒姜丝葱花。"],tip:"先烤再煮能去腥并带出焦香。"},
+    {region:"中国 · 粤菜",zh:"清蒸鲷鱼",local:"清蒸鯛魚",ja:"鯛の中華蒸し",time:"25 分钟",level:"简单",ingredients:["真鲷 1 条","葱、姜","蒸鱼豉油 2 大匙","热油 2 大匙"],steps:["鱼两面各划三刀，铺姜片葱段。","水开后大火蒸 8–10 分钟（500g 约 8 分钟）。","倒掉盘中蒸汁，换新葱丝，淋豉油。","浇上冒烟的热油。"],tip:"蒸出来的汁有腥味，一定要倒掉。"},
+    {region:"韩国",zh:"炖鲷鱼",local:"도미찜",ja:"鯛の韓国風蒸し煮",time:"40 分钟",level:"中等",ingredients:["真鲷 1 条","白萝卜半根","韩式辣椒粉 1 大匙、酱油 3 大匙、蒜泥 1 大匙、糖 1 小匙","葱、青红椒"],steps:["萝卜切厚片铺锅底，加水没过一半，先煮 10 分钟。","调好酱汁，鱼放在萝卜上，淋一半酱汁。","中火盖盖煮 15 分钟，中途舀汤汁浇鱼。","加葱和辣椒，淋剩余酱汁再煮 3 分钟。"],tip:"萝卜吸满鱼汁，往往比鱼还好吃。"},
+    {region:"意大利",zh:"疯狂水煮鱼",local:"Acqua pazza",ja:"アクアパッツァ",time:"30 分钟",level:"简单",ingredients:["鲷鱼 1 条","蛤蜊 200g","小番茄 10 个","黑橄榄、刺山柑少许","白葡萄酒 100ml、橄榄油、蒜 2 瓣、意大利欧芹"],steps:["鱼抹盐，橄榄油煎蒜后把鱼两面煎上色。","加蛤蜊、小番茄、橄榄、刺山柑，倒入白葡萄酒和 200ml 水。","盖盖中火煮 8–10 分钟，蛤蜊开口即可。","淋橄榄油、撒欧芹，汤汁拿来蘸面包。"],tip:"汤汁要乳化发白才香，可以晃锅让油水融合。"},
+    {region:"日本",zh:"鲷鱼刺身",local:"鯛の刺身",ja:"鯛の刺身",time:"20 分钟",level:"中等",ingredients:["刺身级真鲷鱼柳","酱油、山葵","紫苏叶、白萝卜丝"],steps:["鱼柳去皮，或用热水淋皮做成「松皮造」。","斜刀切 5mm 厚片。","摆盘，配山葵酱油。"],tip:"只用标明「刺身用」的鱼，当天吃完。"}
+  ]
+};
+
+const $ = s => document.querySelector(s);
+const statusEl=$("#status"), resultEl=$("#result"), qEl=$("#q"), goBtn=$("#go"), stopBtn=$("#stop");
+let sample=null, ctl=null;
+
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function list(a){return Array.isArray(a)?a.filter(Boolean):[]}
+function country(r){return String(r||"其他").split(/\s*[·・]\s*/)[0]}
+
+function dishHTML(x,open){
+  return `<details class="dish" data-c="${esc(country(x.region))}" ${open?"open":""}>
+    <summary><span class="rg">${esc(x.region)}</span><span class="dn">${esc(x.zh)}</span><span class="dj">${esc([x.local,x.ja].filter((v,i,a)=>v&&a.indexOf(v)===i).join(" / "))}</span><span class="meta">${esc([x.time,x.level].filter(Boolean).join(" · "))}</span></summary>
+    <div class="inner">
+      ${list(x.ingredients).length?`<div class="ing">材料：${esc(list(x.ingredients).join("；"))}</div>`:''}
+      <ol>${list(x.steps).map(s=>`<li>${esc(s)}</li>`).join("")}</ol>
+      ${x.tip?`<div class="tip">要点：${esc(x.tip)}</div>`:''}
+    </div>
+  </details>`;
+}
+
+function render(d,{example=false}={}){
+  if(!d||!d.found){
+    resultEl.innerHTML=`<div class="card notfound"><h3 style="font-family:var(--f-display);margin:0 0 6px">没查到</h3><p style="margin:0;color:var(--muted)">${esc(d?.reason||"换个叫法试试，比如中文俗名、日文假名或英文名。")}</p></div>`;
+    return;
+  }
+  const n=d.names||{}, dishes=list(d.dishes), alts=list(d.alternatives);
+  const regions=[...new Set(dishes.map(x=>country(x.region)))];
+  resultEl.innerHTML=`
+  <article class="card">
+    <div class="tag">
+      <div class="ribbon">
+        ${example?'<span class="pill example">示例</span>':''}
+        ${d.category?`<span class="pill">${esc(d.category)}</span>`:''}
+      </div>
+      <h2 class="tri">
+        <span class="ln zh"><span class="k">中文</span><span class="w">${esc(n.zh)}</span></span>
+        <span class="ln ja"><span class="k">日本語</span><span class="w">${esc(n.ja)}</span>${n.ja_kana&&n.ja_kana!==n.ja?`<span class="kana">${esc(n.ja_kana)}</span>`:''}<button class="copy" type="button" data-copy="${esc(n.ja)}">复制</button></span>
+        <span class="ln en"><span class="k">EN</span><span class="w">${esc(n.en)}</span></span>
+      </h2>
+      ${(list(n.zh_alias).length||list(n.en_alias).length)?`<div class="aka">别名：${esc([...list(n.zh_alias),...list(n.en_alias)].join("、"))}</div>`:''}
+      <div class="latin">${esc(n.latin)}</div>
+    </div>
+    <div class="body">
+      ${d.summary?`<p style="margin:0">${esc(d.summary)}</p>`:''}
+      <div class="facts">
+        ${d.season?`<div class="fact"><div class="lab">当季</div>${esc(d.season)}</div>`:''}
+        ${d.taste?`<div class="fact"><div class="lab">口感</div>${esc(d.taste)}</div>`:''}
+      </div>
+      ${dishes.length?`<div><h3>各地做法</h3>
+        ${regions.length>1?`<div class="regions" role="group" aria-label="按地区筛选"><button class="chip" type="button" data-r="" aria-pressed="true">全部 ${dishes.length}</button>${regions.map(r=>`<button class="chip" type="button" data-r="${esc(r)}" aria-pressed="false">${esc(r)}</button>`).join("")}</div>`:''}
+        <div class="dishes">${dishes.map((x,i)=>dishHTML(x,i===0)).join("")}</div></div>`:''}
+      ${list(d.buying).length?`<div><h3>怎么挑</h3><ul class="tips">${list(d.buying).map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>`:''}
+      ${alts.length?`<div class="alts">容易混淆：${alts.map(a=>`<button type="button" data-q="${esc(a.zh||a.ja||a.en)}">${esc([a.zh,a.ja,a.en].filter(Boolean).join(" / "))}</button>`).join("、")}</div>`:''}
+    </div>
+  </article>`;
+  resultEl.querySelectorAll(".alts button").forEach(b=>b.onclick=()=>{qEl.value=b.dataset.q;run();});
+  resultEl.querySelectorAll(".regions .chip").forEach(b=>b.onclick=()=>{
+    resultEl.querySelectorAll(".regions .chip").forEach(c=>c.setAttribute("aria-pressed",String(c===b)));
+    resultEl.querySelectorAll("details.dish").forEach(el=>el.hidden=!!b.dataset.r&&el.dataset.c!==b.dataset.r);
+  });
+  resultEl.querySelectorAll(".copy").forEach(b=>b.onclick=async()=>{
+    try{await navigator.clipboard.writeText(b.dataset.copy);b.textContent="已复制";}
+    catch{const r=document.createRange();r.selectNodeContents(b.parentNode.querySelector(".w"));getSelection().removeAllRanges();getSelection().addRange(r);}
+  });
+}
+
+const FORMAT=`只回复一个 JSON 对象，不要其他文字。格式：
+{"found":true,"names":{"zh":"中文标准名","zh_alias":["中文别名/各地俗名"],"ja":"日文名（汉字，没有就用片假名）","ja_kana":"片假名读法","en":"英文常用名","en_alias":["其他英文名"],"latin":"学名"},"category":"大类 · 科","summary":"两三句介绍，提到主要在哪些国家地区常吃","season":"当季时间","taste":"口感风味","buying":["挑选要点，3条"],"alternatives":[{"zh":"","ja":"","en":""}],"dishes":[{"region":"国家 · 地区/菜系，如 中国 · 粤菜、日本、韩国、意大利、泰国","zh":"中文菜名","local":"当地原名（原文）","ja":"日文菜名","time":"约多少分钟","level":"简单/中等/较难","ingredients":["材料及用量"],"steps":["步骤"],"tip":"关键要点"}]}
+要求：除名字字段外，说明文字一律用简体中文。dishes 给 5-6 道，来自这种海鲜真正常见的不同国家和地区（中国、日本、韩国、东南亚、欧洲、美洲等，按实际流行程度挑选，不要硬凑），同一国家最多 2 道；步骤 3-5 步，家里能做。alternatives 列出容易混淆的 0-3 种。不宜生食的不要给生食做法；有毒或需特殊处理（如河豚）在 summary 说明。
+如果不是海鲜/水产或无法确定指什么，回复 {"found":false,"reason":"简短中文原因，可附上可能想查的名字"}。`;
+
+async function run(){
+  const text=qEl.value.trim();
+  if(!text){statusEl.className="status err";statusEl.textContent="先输入一个名字。";return;}
+  if(!sample){statusEl.className="status err";statusEl.textContent="在 Claude 里打开这个页面才能查询。";return;}
+  ctl=new AbortController();
+  goBtn.disabled=true;stopBtn.hidden=false;
+  statusEl.className="status";statusEl.textContent=`正在查「${text}」，通常要十几秒…`;
+  try{
+    const d=await sample.json(`用户输入了一个海鲜/水产的名字（可能是中文、日文、英文或俗名）：「${text}」。请识别它指的是什么。\n\n${FORMAT}`,{signal:ctl.signal,cache:{gcTime:86400000}});
+    render(d);
+    statusEl.textContent="";
+    if(d&&d.found) remember(d.names?.zh||text);
+  }catch(e){
+    statusEl.className="status err";
+    const known={
+      cancelled:"已停止。",
+      not_granted:"需要允许这个页面使用 Claude 才能查询。",
+      sampling_disabled:"这个账号暂时不能使用 Claude 查询。",
+      rate_limited:"查得太频繁了，过一会儿再试。",
+      session_expired:"登录已过期，请重新登录 Claude 后再试。",
+      refused:"这个没法回答，换个说法试试。",
+      prompt_too_large:"名字太长了，简短一点再试。"
+    };
+    statusEl.textContent=known[e?.code] ?? "网络或服务出了点问题。";
+    if(!(e?.code in known)){const b=document.createElement("button");b.className="btn-ghost";b.type="button";b.textContent="重试";b.onclick=run;statusEl.append(" ",b);}
+  }finally{
+    goBtn.disabled=false;stopBtn.hidden=true;ctl=null;
+  }
+}
+
+function loadHist(){try{return JSON.parse(localStorage.getItem("seafood-hist")||"[]")}catch{return[]}}
+function remember(name){
+  if(!name)return;
+  const h=[name,...loadHist().filter(x=>x!==name)].slice(0,8);
+  try{localStorage.setItem("seafood-hist",JSON.stringify(h))}catch{}
+  drawHist();
+}
+function drawHist(){
+  const h=loadHist(),el=$("#history");
+  el.hidden=!h.length;
+  el.innerHTML=h.length?"最近查过："+h.map(x=>`<button class="chip" type="button">${esc(x)}</button>`).join(""):"";
+  el.querySelectorAll("button").forEach(b=>b.onclick=()=>{qEl.value=b.textContent;run();});
+}
+
+$("#form").addEventListener("submit",e=>{e.preventDefault();run()});
+stopBtn.onclick=()=>ctl?.abort();
+document.querySelectorAll(".chips .chip").forEach(b=>b.onclick=()=>{qEl.value=b.textContent;run();});
+
+render(EXAMPLE,{example:true});
+drawHist();
+
+(async()=>{
+  try{sample=await window.claude?.use?.("sample")}catch{sample=null}
+  if(!sample){statusEl.className="status";statusEl.textContent="在 Claude 里打开这个页面才能查询；下面是示例。";}
+})();
+</script>

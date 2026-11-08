@@ -1,0 +1,1 @@
+window.ADD_I18N("en", {saba:{d:{"红烧青花鱼":{n:"Chinese red-braised mackerel (hongshao)",h:"Pan-fry chunks until golden, then braise 10 minutes with scallion, ginger, garlic, cooking wine, light and dark soy sauce, sugar and water, and reduce."}}}});

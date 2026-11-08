@@ -1,0 +1,87 @@
+// English translation T
+window.ADD_I18N("en", {
+ mussel:{tip:"Pull off the beard sticking out of the shell and scrub the shells. Discard any that don't open when cooked.",warn:"Shellfish toxins (paralytic shellfish poisoning) occasionally occur in spring and summer; heed harvest-area advisories.",
+  d:{
+   "白酒青口":{n:"Moules marinières",h:"Soften shallots in butter, add white wine and mussels, cover 4 minutes until open, add parsley and serve with fries. Belgium's national dish.",serves:"2",time:"20 min",
+    ingT:[["Mussels","500 g"],["Shallot or onion","1/2"],["Garlic","2 cloves"],["Parsley","a little"],["Baguette or fries","to taste"]],
+    sauceT:[["White wine","100 ml"],["Butter","20 g"],["Cream (optional)","3 tbsp"],["Black pepper","a pinch"]],
+    steps:["Scrub the shells and pull the beards off toward the hinge end. Tap any open ones; discard those that don't close.",
+     "Mince the onion and garlic.",
+     "Melt the butter in a deep pot on medium and soften the onion and garlic 2 minutes.",
+     "Add the mussels and wine, cover and steam on high 4–5 minutes, shaking the pot once.",
+     "When all are open, stir in the cream, black pepper and chopped parsley.",
+     "Tip into a big bowl with the broth and mop it up with bread."],
+    tips:["Mussels still closed after cooking are dead; throw them away.","Frozen cooked mussels from the supermarket can go in at step 4; just heat 3 minutes."]},
+   "西班牙海鲜饭":{n:"Paella de marisco",h:"In a wide pan fry tomato, red pepper and rice, add seafood stock and saffron, top with mussels, prawns and squid and cook until a crust forms."},
+   "青口汤":{n:"Honghap-tang (Korean mussel soup)",h:"Boil mussels with water, garlic, scallion and green chili, seasoned only with salt. A Korean street-stall staple."},
+   "葱姜炒青口":{n:"Mussels stir-fried with ginger and scallion",h:"Blanch mussels until open, then stir-fry hot with ginger, scallion, oyster sauce and wine."}
+  }},
+ akagai:{tip:"The flesh is red (it contains hemoglobin); a premium sushi shellfish. If it contracts when you slap it, it's fresh.",
+  d:{
+   "赤贝醋拌":{n:"Akagai nuta (ark shell with vinegared miso)",h:"Toss sliced ark shell and blanched scallions with vinegared miso.",serves:"2",time:"15 min",
+    ingT:[["Sashimi-grade ark shell (cleaned)","4–6"],["Scallions (or wakegi)","4"],["Wakame (optional)","a little"]],
+    sauceT:[["White miso","2 tbsp"],["Vinegar","1 tbsp"],["Sugar","1 tbsp"],["Japanese mustard","1/2 tsp"]],
+    steps:["Cut the scallions into 4 cm lengths, blanch 30 seconds, cool and squeeze dry.",
+     "Mix the miso, vinegar, sugar and mustard into a vinegared miso.",
+     "Cut the ark shell into bite-sized pieces and slap them on the board; fresh flesh curls up.",
+     "Put the ark shell, scallions and wakame in a bowl and toss with the miso dressing."],
+    tips:["Always buy cleaned, sashimi-grade ark shell from the supermarket.","This style is called \"nuta\" and also suits cockles and squid."]},
+   "赤贝寿司":{n:"Akagai nigiri",h:"Remove and butterfly the meat, score it, slap it on the board so it curls, and shape into nigiri."},
+   "葱油血蚶":{n:"Blanched blood clams (Ningbo style)",h:"Dip in hot water 10 seconds until slightly open, pry apart and dip in ginger vinegar or soy sauce."}
+  }},
+ saruboo:{tip:"Smaller than ark shell; in Japan mostly canned as \"akagai no ajitsuke\".",warn:"This clam once caused a major hepatitis A outbreak in China; always cook it through.",
+  d:{
+   "甜辣毛蚶":{n:"Sweet-savory simmered ark clams",h:"Open the clams, remove the meat and simmer with soy sauce, sugar, sake and ginger until the liquid is gone.",serves:"2–3",time:"20 min",
+    ingT:[["Half-crenated ark clams","300 g"],["Ginger","1 small piece"]],
+    sauceT:[["Soy sauce","2 tbsp"],["Sake","2 tbsp"],["Sugar","1 tbsp"],["Mirin","1 tbsp"]],
+    steps:["Scrub the shells, put them in a pot with a little water, cover and cook until they open.",
+     "Remove the meat; strain the liquid and keep 3 tbsp.",
+     "Bring the soy sauce, sake, sugar, mirin, shredded ginger and reserved liquid to a boil.",
+     "Add the meat and simmer on medium until the liquid is gone and they're glossy."],
+    tips:["Cook these clams completely; never eat them raw or half-cooked.","Once cool, keep in a box in the fridge for 3 days."]},
+   "葱油毛蚶":{n:"Ark clams with scallion oil",h:"Boil, remove the meat and dress with scallion oil and soy sauce."},
+   "拌毛蚶":{n:"Saekkomak muchim (Korean dressed ark clams)",h:"Boil, remove half the shell and top with a sauce of soy sauce, chili flakes, garlic, scallion and sesame oil."}
+  }},
+ hokkigai:{tip:"Japanese hokkigai is the Sakhalin surf clam. Chinese supermarket \"arctic surf clam\" is usually cooked-frozen Canadian clam, a different species. Raw hokkigai turns pink when cooked.",
+  d:{
+   "北寄贝饭":{n:"Hokki-meshi (surf clam rice)",h:"Simmer surf clam in soy sauce and sake, cook rice in the liquid and mix the clam in at the end. A Soma, Fukushima specialty.",serves:"3–4",time:"50 min",
+    ingT:[["Raw surf clam meat","4 (about 150 g)"],["Rice","2 cups (360 ml)"],["Ginger","1 small piece"],["Scallion or nori","a little"]],
+    sauceT:[["Soy sauce","2 tbsp"],["Sake","2 tbsp"],["Mirin","1 tbsp"],["Water","as needed"]],
+    steps:["Wash the rice and drain 30 minutes.",
+     "Cut the clam into 1 cm strips and shred the ginger.",
+     "Bring the soy sauce, sake, mirin and ginger to a boil in a small pan, cook the clam 1 minute (it turns pink) and lift it out; keep the liquid.",
+     "Cool the liquid, pour it into the rice cooker, add water to the 2-cup line and cook as usual.",
+     "When done, add the clam, cover and let stand 10 minutes, then mix.",
+     "Serve topped with scallion or nori."],
+    tips:["Cooking the clam first and adding it back at the end keeps it from toughening.","This is \"hokki-meshi\", the famous dish of Soma, Fukushima."]},
+   "北寄贝咖喱":{n:"Hokki curry",h:"A Tomakomai, Hokkaido specialty: Japanese curry made with surf clams and vegetables."},
+   "北极贝刺身":{n:"Arctic surf clam sashimi",h:"Thaw cooked-frozen clams naturally and eat with wasabi and soy sauce."}
+  }},
+ torigai:{tip:"The black foot looks like a bird's beak; soft and sweet. Supermarket ones are almost always pre-blanched.",
+  d:{
+   "鸟贝醋拌":{n:"Cockle and wakame sunomono",h:"Toss cockles, wakame and cucumber in sweet vinegar (sanbaizu).",serves:"2",time:"10 min",
+    ingT:[["Blanched cockles","6–8 pieces"],["Dried wakame","2 g"],["Cucumber","1/2"]],
+    sauceT:[["Rice vinegar","3 tbsp"],["Sugar","1.5 tbsp"],["Soy sauce","1 tsp"],["Salt","a pinch"]],
+    steps:["Soak the wakame 5 minutes and squeeze dry. Slice the cucumber thin, salt for 5 minutes and squeeze.",
+     "Cut the cockles in half.",
+     "Mix the vinegar, sugar and soy sauce into sanbaizu.",
+     "Put everything in a bowl and toss with the dressing."],
+    tips:["Supermarket cockles are pre-blanched; use as is.","Spring is cockle season."]},
+   "鸟贝寿司":{n:"Torigai nigiri",h:"Open blanched cockles, shape into nigiri and brush with a little sweet sauce if you like."},
+   "英式醋泡鸟蛤":{n:"Cockles in vinegar",h:"A British seaside snack: boiled cockles doused in malt vinegar and sprinkled with pepper."}
+  }},
+ mirugai:{tip:"Japan's prized \"hon-miru\" is a different, pricier clam; the common supermarket \"shiro-miru\" is geoduck. You eat the long siphon, blanched and peeled.",
+  d:{
+   "象拔蚌刺身":{n:"Geoduck sashimi",h:"Blanch the siphon 5 seconds, peel and slice thin; crisp and sweet.",serves:"2",time:"15 min",
+    ingT:[["Geoduck (siphon)","1"],["Shredded daikon, shiso","to taste"]],
+    sauceT:[["Soy sauce","to taste"],["Wasabi","to taste"],["Ice water","1 bowl"]],
+    steps:["Slide a knife between the shell and meat to free it, and cut off the long siphon.",
+     "Dip the siphon in boiling water for 5–10 seconds, then straight into ice water.",
+     "The outer skin turns white and loosens; peel it off by hand.",
+     "Split the siphon lengthwise, rinse out any sand and pat dry.",
+     "Slice thin on the diagonal, arrange on daikon and shiso and dip in wasabi soy sauce."],
+    tips:["Blanch only briefly to loosen the skin; the inside stays raw.","Use the body for congee or stir-fries."]},
+   "象拔蚌两吃":{n:"Geoduck two ways",h:"Siphon sliced as sashimi, body cooked into congee. Cantonese style."},
+   "西雅图象拔蚌":{n:"Geoduck crudo (Seattle style)",h:"Thin slices with citrus juice, olive oil and sea salt."}
+  }}
+});

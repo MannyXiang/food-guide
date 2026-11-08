@@ -1,0 +1,88 @@
+// English translation ZB
+window.ADD_I18N("en", {
+ wakame:{tip:"Fresh wakame appears in spring; the rest of the year use dried or salted. The slippery root part (mekabu) is chopped and eaten with soy sauce.",
+  d:{
+   "豆腐裙带菜味噌汤":{n:"Tofu and wakame miso soup",h:"Add diced tofu and rehydrated wakame to dashi and dissolve in miso. Japan's most everyday soup.",serves:"2",time:"10 min",
+    ingT:[["Dried wakame","2 g (1 tbsp)"],["Silken tofu","1/2 block"],["Scallion","1"]],
+    sauceT:[["Water","400 ml"],["Dashi granules","1/2 tsp"],["Miso","1.5–2 tbsp"]],
+    steps:["Soak the dried wakame for 5 minutes and squeeze dry. Cut the tofu into 1.5 cm cubes.",
+     "Bring the water and dashi granules to a boil.",
+     "Add the tofu and simmer 1 minute.",
+     "Turn the heat to low and dissolve the miso in a ladle in the soup (or use a strainer).",
+     "Add the wakame, turn off the heat just before it boils, and scatter with scallion."],
+    tips:["Don't boil once the miso is in; the aroma disappears.","Dried wakame expands about 10 times, so don't overdo it."]},
+   "醋拌裙带菜":{n:"Wakame in sweet vinegar (sunomono)",h:"Toss with cucumber slices, small shrimp or octopus in rice vinegar, sugar and soy sauce."},
+   "海带汤（生日汤）":{n:"Korean seaweed soup (miyeok-guk)",h:"Sauté wakame and beef in sesame oil, add water and simmer 30 minutes; season with soup soy sauce. A must on Korean birthdays and after childbirth."},
+   "凉拌海带芽":{n:"Chinese wakame salad",h:"Rehydrate and blanch wakame, then toss with garlic, vinegar, soy sauce, chili oil and sesame seeds."}
+  }},
+ hijiki:{tip:"Mostly sold dried. Soak 20–30 minutes and it swells 8–10 times.",
+  warn:"Contains inorganic arsenic. Boiling after soaking and discarding the water removes most of it. Don't eat large amounts every day.",
+  d:{
+   "煮羊栖菜":{n:"Simmered hijiki (hijiki no nimono)",h:"Sauté rehydrated hijiki with carrot, fried tofu and soybeans in sesame oil, then simmer down in dashi, soy sauce, sugar and mirin.",serves:"4 (keeps as a side)",time:"30 min",
+    ingT:[["Dried hijiki (me-hijiki)","15 g"],["Carrot","1/3"],["Thin fried tofu (aburaage)","1 sheet"],["Boiled soybeans (optional)","50 g"]],
+    sauceT:[["Sesame oil","1 tbsp"],["Dashi","150 ml"],["Soy sauce","2 tbsp"],["Sugar","1 tbsp"],["Mirin","1 tbsp"]],
+    steps:["Soak the hijiki for 20 minutes, rinse in a sieve and drain.",
+     "Cut the carrot into thin strips. Pour boiling water over the fried tofu to remove the oil and cut into strips.",
+     "Heat the sesame oil, stir-fry the hijiki for 1 minute, then add the carrot, fried tofu and soybeans and mix.",
+     "Add the dashi, sugar and mirin and simmer over medium heat for 5 minutes.",
+     "Add the soy sauce and cook until the liquid is almost gone."],
+    tips:["Hijiki swells a lot when soaked; 15 g serves four.","Keeps 4–5 days in the fridge, and is great mixed into rice for rice balls."]},
+   "羊栖菜沙拉":{n:"Hijiki salad",h:"Blanched hijiki with edamame, corn and shredded carrot in Japanese-style dressing."},
+   "拌羊栖菜":{n:"Korean hijiki salad (tot muchim)",h:"Blanch and toss with gochujang, vinegar, sugar and garlic, or with tofu and sesame oil."},
+   "凉拌鹿角菜":{n:"Chinese hijiki salad",h:"Rehydrate, blanch and discard the water, then toss with grated ginger, vinegar, soy sauce and sesame oil. Common in Wenzhou, Zhejiang."}
+  }},
+ mozuku:{tip:"Over 90% comes from Okinawa. Fine threads that are very slippery. Supermarkets sell small ready-seasoned cups of mozuku in vinegar.",
+  d:{
+   "醋海蕴":{n:"Mozuku in vinegar (mozuku-su)",h:"Rinse off the salt, dress with sanbaizu and top with shredded ginger and cucumber.",serves:"2",time:"10 min",
+    ingT:[["Fresh or salted mozuku","100 g"],["Cucumber","1/3"],["Ginger","a little"]],
+    sauceT:[["Rice vinegar","2 tbsp"],["Sugar","1 tbsp"],["Soy sauce","1 tsp"],["Dashi (optional)","1 tbsp"]],
+    steps:["Soak salted mozuku in water for 5 minutes to remove the salt, rinse a few times in a sieve and drain. Fresh mozuku just needs a quick rinse.",
+     "Cut into easy-to-eat lengths (about 5 cm).",
+     "Mix the vinegar, sugar, soy sauce and dashi.",
+     "Put the mozuku and cucumber strips in a bowl, pour over the dressing and top with shredded ginger."],
+    tips:["Ready-seasoned \"mozuku-su\" cups from the supermarket can be eaten straight away.","Okinawan mozuku is thicker and has a nicer bite."]},
+   "海蕴天妇罗":{n:"Mozuku tempura",h:"Mix mozuku and shredded carrot with a little batter and drop spoonfuls into hot oil. Okinawan style."},
+   "海蕴汤":{n:"Mozuku soup",h:"Add mozuku and beaten egg to chicken stock or dashi, with ginger and scallion."}
+  }},
+ umibudo:{tip:"An Okinawan specialty whose beads pop in your mouth. Don't refrigerate (they shrivel); keep at room temperature and rinse just before eating.",
+  d:{
+   "海葡萄配三杯醋":{n:"Sea grapes with sanbaizu",h:"Rinse, soak in cold water for 1 minute, drain and dip in sanbaizu or ponzu.",serves:"2",time:"5 min",
+    ingT:[["Sea grapes","50 g"],["Ice water","1 bowl"]],
+    sauceT:[["Sanbaizu (or ponzu)","2 tbsp"]],
+    steps:["Rinse the sea grapes gently under the tap to remove the salt.",
+     "Soak in ice water for 1 minute; the beads become plump and glossy.",
+     "Drain and plate.",
+     "Dip in sanbaizu or ponzu as you eat. Don't pour it over in advance."],
+    tips:["Don't refrigerate. Cold makes the beads shrivel; store at room temperature.","Vinegar left on too long deflates the beads, so dip rather than dress."]},
+   "海葡萄盖饭":{n:"Sea grape rice bowl (umibudo-don)",h:"Top sushi rice with sashimi and sea grapes and drizzle with soy sauce."},
+   "菲律宾海葡萄沙拉":{n:"Filipino sea grape salad (ensaladang lato)",h:"Toss sea grapes with diced tomato and onion in vinegar, fish sauce and lime juice."}
+  }},
+ tengusa:{tip:"Boiled down, it gives kanten (agar). The \"tokoroten\" noodles in Japanese supermarkets are made from it.",
+  d:{
+   "寒天甜品":{n:"Anmitsu",h:"Cubes of agar jelly with sweet red bean paste, fruit and shiratama dumplings, drizzled with kuromitsu syrup.",serves:"4",time:"20 min (plus 1 hour chilling)",
+    ingT:[["Agar powder","4 g"],["Sweet red bean paste (anko)","4 tbsp"],["Fruit (canned mandarins, strawberries, kiwi, etc.)","to taste"],["Shiratama dumplings (optional)","8"]],
+    sauceT:[["Water","500 ml"],["Sugar","1 tbsp"],["Kuromitsu (black sugar syrup)","to taste"]],
+    steps:["Put the water and agar powder in a pan, stir well and heat over medium, stirring.",
+     "Once it boils, lower the heat and simmer 2 more minutes so the agar fully dissolves. Stir in the sugar.",
+     "Pour into a square container. It sets in about 30 minutes at room temperature; then chill for 1 hour.",
+     "Cut into 1.5 cm cubes.",
+     "Put the agar, bean paste, fruit and dumplings in bowls and pour over the kuromitsu."],
+    tips:["Agar sets at room temperature, so it's more foolproof than gelatin.","It must boil for 2 minutes or it won't set.","This dessert is called anmitsu."]},
+   "心太凉粉":{n:"Tokoroten",h:"Pushed through a special press into noodles; eaten with vinegar-soy and mustard in Kanto, or with kuromitsu in Kansai."},
+   "凉拌石花菜":{n:"Chinese agar seaweed salad",h:"Soak, cut, blanch and toss with garlic, vinegar, soy sauce and chili oil."}
+  }},
+ aosa:{tip:"Dried \"aosa\" from Japanese supermarkets often goes in miso soup; \"aonori\" is a powder sprinkled on okonomiyaki and yakisoba.",
+  d:{
+   "石莼味噌汤":{n:"Sea lettuce miso soup (aosa no misoshiru)",h:"After turning off the heat and dissolving the miso, add a pinch of dried aosa. Wonderfully fragrant.",serves:"2",time:"10 min",
+    ingT:[["Dried aosa","2–3 g (a pinch)"],["Tofu (optional)","1/3 block"]],
+    sauceT:[["Water","400 ml"],["Dashi granules","1/2 tsp"],["Miso","1.5–2 tbsp"]],
+    steps:["Bring the water and dashi granules to a boil, add cubed tofu and simmer 1 minute.",
+     "Turn the heat to low and dissolve the miso.",
+     "Turn off the heat and ladle into bowls.",
+     "Finally add a pinch of aosa: it opens up at once and smells of the sea."],
+    tips:["No need to soak aosa; just add it at the end.","Don't boil it; long heating dulls the color and aroma."]},
+   "大阪烧":{n:"Okonomiyaki",h:"Cabbage, batter and pork cooked into a pancake, brushed with sauce and mayo, sprinkled with aonori and bonito flakes."},
+   "石莼天妇罗":{n:"Sea lettuce tempura",h:"Mixed into tempura batter and fried, or used in the batter for chikuwa isobe-age."},
+   "海白菜豆腐汤":{n:"Chinese sea lettuce and tofu soup",h:"Simmer sea lettuce with tofu and dried shrimp, seasoned only with salt. Common on the Fujian and Shandong coasts."}
+  }}
+});

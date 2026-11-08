@@ -1,0 +1,512 @@
+<title>食材图鉴</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,400;1,400&display=swap">
+<style>
+/* Layout: one column "market counter" — search on top, price-tag style detail card, browse shelf below */
+:root{
+  --bg:#eef2ef;         /* market tile */
+  --surface:#ffffff;
+  --ink:#16262a;
+  --muted:#5a6d70;
+  --line:#d4ddda;
+  --accent:#d2562d;     /* price-tag red-orange */
+  --accent-ink:#ffffff;
+  --sea:#1f6f7a;
+  --sea-soft:#e1eeee;
+  --warn:#9a6a00;
+  --warn-soft:#fbf1d9;
+  --f-display:"Shippori Mincho","Noto Serif SC","Songti SC",serif;
+  --f-body:"Noto Sans SC","PingFang SC","Hiragino Sans","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1a1b;--surface:#16262a;--ink:#e6efee;--muted:#93a8a8;--line:#28403f;
+  --accent:#ee7a52;--accent-ink:#1a0d07;--sea:#6cc3cc;--sea-soft:#183a3c;--warn:#e0b44c;--warn-soft:#2e2711;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1a1b;--surface:#16262a;--ink:#e6efee;--muted:#93a8a8;--line:#28403f;
+  --accent:#ee7a52;--accent-ink:#1a0d07;--sea:#6cc3cc;--sea-soft:#183a3c;--warn:#e0b44c;--warn-soft:#2e2711;color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:760px;margin:0 auto;padding-block:28px 64px;display:flex;flex-direction:column;gap:22px}
+header h1{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,6vw,42px);line-height:1.15;margin:0;letter-spacing:.02em;text-wrap:balance}
+header h1 .ja{font-size:.5em;color:var(--muted);font-weight:600;margin-left:.5em;letter-spacing:.1em}
+header p{margin:6px 0 0;color:var(--muted);max-width:60ch}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px;position:relative}
+#q{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;padding:4px 11px;border-radius:999px;background:var(--sea-soft);color:var(--sea);border:1px solid transparent}
+.chip[aria-pressed="true"]{background:var(--sea);color:var(--surface)}
+.hint{font-size:13px;color:var(--muted);margin:0}
+
+.results{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.results button{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;text-align:left;background:var(--surface);border:0;border-bottom:1px solid var(--line);padding:10px 12px}
+.results button:last-child{border-bottom:0}
+.results button:hover,.results button.on{background:var(--sea-soft)}
+.results .z{font-weight:700}
+.results .j{font-family:var(--f-display);font-weight:600}
+.results .e,.results .m{color:var(--muted);font-size:13px}
+.empty{padding:12px;color:var(--muted);font-size:14px}
+
+/* detail — styled like a market price tag */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.tag{padding:20px 20px 18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.ribbon{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{font-size:12px;letter-spacing:.06em;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.now{border-color:var(--accent);color:var(--accent)}
+.latin{font-family:var(--f-mono);font-style:italic;color:var(--muted);font-size:13px}
+.tri{display:flex;flex-direction:column;gap:4px;margin:4px 0 2px;min-width:0}
+.tri .ln{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;min-width:0}
+.tri .k{font-size:11px;letter-spacing:.1em;color:var(--muted);width:3.6em;flex:none;white-space:nowrap}
+.tri .w{font-family:var(--f-display);font-weight:800;line-height:1.2;overflow-wrap:anywhere;min-width:0}
+.tri .w{font-size:clamp(18px,4.6vw,22px)}
+.tri .first .w{font-size:clamp(28px,7vw,38px)}
+.tri .en .w{font-family:var(--f-body);font-weight:700}
+.kana{color:var(--muted);font-size:14px}
+.copy{background:none;border:0;padding:0;color:var(--sea);font-size:12px}
+.aka{font-size:13px;color:var(--muted);overflow-wrap:anywhere;margin:0}
+.body{padding:18px 20px;display:flex;flex-direction:column;gap:18px}
+.body h3{font-family:var(--f-display);font-size:19px;margin:0 0 6px;font-weight:800}
+.note{background:var(--bg);border-radius:10px;padding:10px 12px;margin:0}
+.note.warn{background:var(--warn-soft);color:var(--ink)}
+.note .lab{display:block;font-size:12px;color:var(--muted);letter-spacing:.06em}
+.note.warn .lab{color:var(--warn)}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;font-family:var(--f-mono);font-size:11px;text-align:center;font-variant-numeric:tabular-nums}
+.months span{padding:3px 0;border-radius:4px;background:var(--bg);color:var(--muted)}
+.months span.in{background:var(--sea);color:var(--surface)}
+.months span.cur{outline:1.5px solid var(--accent);outline-offset:-1.5px}
+.regions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.dishes{display:flex;flex-direction:column;gap:10px}
+details.dish{border:1px solid var(--line);border-radius:12px}
+details.dish summary{list-style:none;cursor:pointer;padding:12px 14px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+details.dish summary::-webkit-details-marker{display:none}
+details.dish summary::before{content:"＋";color:var(--accent);font-weight:700}
+details.dish[open] summary::before{content:"－"}
+.dn{font-weight:700;font-size:16px}
+.dj{color:var(--muted);font-size:13px}
+.rg{font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--accent);border-radius:4px;padding:1px 7px;letter-spacing:.04em}
+.dish p{margin:0;padding:0 14px 14px 36px}
+.full{padding:0 14px 16px;display:flex;flex-direction:column;gap:14px}
+.dish .full p.lead{margin:0;padding:0;color:var(--muted)}
+.dish p.untrans{padding:0 14px 8px}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{font-size:13px;background:var(--bg);border-radius:6px;padding:3px 9px}
+.meta b{font-weight:500;color:var(--muted);margin-right:4px}
+.badge{font-size:11px;font-weight:700;color:var(--sea);border:1px solid var(--sea);border-radius:4px;padding:0 6px;letter-spacing:.04em}
+.full h4{font-size:14px;margin:0 0 6px;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.ing{width:100%;border-collapse:collapse;font-size:14px}
+.ing td{padding:5px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+.ing td:nth-child(2){text-align:right;white-space:nowrap;padding-left:10px;font-variant-numeric:tabular-nums}
+.ing .jn{display:block;font-size:12px;color:var(--muted)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:st;display:flex;flex-direction:column;gap:10px}
+.steps li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start}
+.steps li::before{content:counter(st);font-family:var(--f-mono);font-size:13px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center}
+.tips{margin:0;padding:10px 12px 10px 28px;background:var(--warn-soft);border-radius:10px;font-size:14px}
+.tips li+li{margin-top:4px}
+
+/* shelf */
+.shelf h2{font-family:var(--f-display);font-size:20px;margin:0 0 10px;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:0;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.tile:hover{border-color:var(--sea)}
+.tile[aria-current="true"]{border-color:var(--accent)}
+.tile .z{font-weight:700}
+.tile .j{font-family:var(--f-display);font-weight:600;color:var(--muted);font-size:14px}
+.tile .e{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+footer{font-size:12px;color:var(--muted);text-align:center}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface);flex:none}
+.lang button{border:0;background:none;padding:5px 12px;font-size:13px;color:var(--muted)}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.untrans{font-size:12px;color:var(--warn);margin:0}
+/* tabs + today */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabs a{padding:8px 14px;text-decoration:none;color:var(--muted);font-weight:500;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:700}
+.recs{display:flex;flex-direction:column;gap:12px}
+.rec{background:var(--surface);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;overflow:hidden}
+.rec-main{display:flex;flex-direction:column;gap:4px;padding:16px 18px 12px;color:inherit;text-decoration:none}
+.rec-main:hover .rec-name{color:var(--accent)}
+.rec-food{font-size:13px;color:var(--sea);font-weight:700;letter-spacing:.04em}
+.rec-name{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,5.4vw,27px);line-height:1.25}
+.rec-sub{color:var(--muted);font-size:13px}
+.rec-lead{font-size:14px;color:var(--muted);margin-top:4px}
+.rec .meta{margin-top:8px}
+.rec-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;border-top:1px solid var(--line);padding:8px 10px 8px 18px}
+.rec-foot .go{font-size:13px;color:var(--accent);text-decoration:none;font-weight:700}
+.swap{background:none;border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:13px;color:var(--muted)}
+.swap:hover{border-color:var(--sea);color:var(--sea)}
+.back{font-size:14px;color:var(--sea);text-decoration:none;font-weight:500}
+.foodline{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:baseline;font-size:14px}
+.foodline a{color:var(--sea)}
+.small{font-size:12px;color:var(--muted);margin:0}
+#dishView .full{padding:0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:6px 14px;border-radius:999px;font-size:13px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="top">
+      <h1 id="h1"></h1>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="zh">中文</button><button type="button" data-lang="ja">日本語</button><button type="button" data-lang="en">English</button>
+      </div>
+    </div>
+    <p id="intro"></p>
+  </header>
+
+  <nav class="tabs"><a href="#today" data-tab="today" id="tabToday"></a><a href="#atlas" data-tab="atlas" id="tabAtlas"></a></nav>
+
+  <section id="todayView" class="recs" hidden></section>
+  <section id="dishView" hidden></section>
+
+  <div id="atlasView" style="display:contents">
+  <div class="panel">
+    <label for="q" class="hint" id="qlabel"></label>
+    <input id="q" type="search" autocomplete="off">
+    <div id="results" class="results" hidden></div>
+    <div class="chips" id="cats" role="group"></div>
+  </div>
+
+  <article class="card" id="detail"></article>
+
+  <section class="shelf">
+    <h2 id="shelfTitle"></h2>
+    <div class="grid" id="grid"></div>
+  </section>
+  </div>
+
+  <footer id="foot"></footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script src="data.js"></script>
+<script>
+const F = window.FOODS;
+const byId = Object.fromEntries(F.map(f => [f.id, f]));
+const TODAY = new Date();
+const NOW = TODAY.getMonth() + 1;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// ---- interface text
+const T = {
+ zh:{title:"食材图鉴",sub:"食材ずかん",intro:"输入中文、日文（汉字、假名、罗马字）或英文，查看中日英名称和各地做法。资料内置在网页里，离线也能用。",
+  qlabel:"搜索食材",ph:"例如：鲭鱼、さば、saba、mackerel",all:"全部",allFoods:"全部食材",now:m=>`${m}月应季`,sea:"海鲜全部",
+  empty:(q,n)=>`还没有收录「${q}」。目前收录 ${n} 种，会继续扩充。`,nowPill:"现在应季",aka:"别名：",warn:"安全提示",tip:"选购与处理",
+  season:"日本应季",dishes:"各地做法",badge:"新手菜谱",serves:"份量",servesU:" 人份",time:"用时",level:"难度",lv:{1:"新手可做",2:"稍有挑战",3:"进阶"},
+  ing:"食材",sauce:"调料",steps:"步骤",tips:"新手要点",shop:"超市找：",copy:"复制",copied:t=>`已复制「${t}」`,
+  untrans:"",foot:(n,s,d)=>`收录 ${n} 种食材（海鲜 ${s} 种）· ${d} 道做法 · 数据内置，不联网也能查`,sep:"、",
+  cats:{fish:"鱼类",shell:"贝类",crust:"虾蟹",ceph:"鱿鱼章鱼",roe:"鱼卵海胆等",weed:"海藻",meat:"肉蛋",veg:"蔬菜",mush:"菌菇",soy:"豆制品",fruit:"水果"},
+  regions:{cn:"中国",jp:"日本",kr:"韩国",sea:"东南亚",eu:"欧洲",am:"美洲"}},
+ ja:{title:"食材ずかん",sub:"食材图鉴",intro:"日本語（漢字・かな・ローマ字）、中国語、英語で検索。中日英の名前と、各国・地域の料理法がわかります。データは内蔵なのでオフラインでも使えます。",
+  qlabel:"食材を検索",ph:"例：さば、鯖、鲭鱼、mackerel",all:"すべて",allFoods:"すべての食材",now:m=>`${m}月が旬`,sea:"魚介すべて",
+  empty:(q,n)=>`「${q}」はまだ収録されていません。現在 ${n} 種類を収録中です。`,nowPill:"今が旬",aka:"別名：",warn:"安全上の注意",tip:"選び方・下処理",
+  season:"日本での旬",dishes:"各国の料理法",badge:"詳しいレシピ",serves:"分量",servesU:" 人分",time:"時間",level:"難易度",lv:{1:"初心者向け",2:"少し難しい",3:"上級"},
+  ing:"材料",sauce:"調味料",steps:"作り方",tips:"失敗しないコツ",shop:"",copy:"コピー",copied:t=>`「${t}」をコピーしました`,
+  untrans:"※この内容はまだ日本語に翻訳されていません（中国語で表示）",foot:(n,s,d)=>`${n} 種類の食材（魚介 ${s} 種類）・${d} の料理法・データ内蔵でオフラインでも使えます`,sep:"、",
+  cats:{fish:"魚",shell:"貝",crust:"エビ・カニ",ceph:"イカ・タコ",roe:"魚卵・ウニなど",weed:"海藻",meat:"肉・卵",veg:"野菜",mush:"きのこ",soy:"大豆製品",fruit:"果物"},
+  regions:{cn:"中国",jp:"日本",kr:"韓国",sea:"東南アジア",eu:"ヨーロッパ",am:"アメリカ大陸"}},
+ en:{title:"Food Atlas",sub:"食材图鉴 · 食材ずかん",intro:"Search in English, Chinese or Japanese (kanji, kana, romaji) to see names in all three languages and how each region cooks it. All data is built in and works offline.",
+  qlabel:"Search ingredients",ph:"e.g. mackerel, saba, さば, 鲭鱼",all:"All",allFoods:"All ingredients",now:m=>`In season (${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][m-1]})`,sea:"All seafood",
+  empty:(q,n)=>`"${q}" isn't in the database yet. ${n} ingredients so far.`,nowPill:"In season now",aka:"Also called: ",warn:"Safety",tip:"Buying & prep",
+  season:"In season (Japan)",dishes:"Dishes by region",badge:"Step-by-step",serves:"Serves",servesU:"",time:"Time",level:"Level",lv:{1:"Beginner",2:"Intermediate",3:"Advanced"},
+  ing:"Ingredients",sauce:"Seasonings",steps:"Steps",tips:"Beginner tips",shop:"In Japan: ",copy:"copy",copied:t=>`Copied "${t}"`,
+  untrans:"Not yet translated into English (shown in Chinese).",foot:(n,s,d)=>`${n} ingredients (${s} seafood) · ${d} dishes · built-in data, works offline`,sep:", ",
+  cats:{fish:"Fish",shell:"Shellfish",crust:"Shrimp & crab",ceph:"Squid & octopus",roe:"Roe, urchin & more",weed:"Seaweed",meat:"Meat & eggs",veg:"Vegetables",mush:"Mushrooms",soy:"Soy foods",fruit:"Fruit"},
+  regions:{cn:"China",jp:"Japan",kr:"Korea",sea:"Southeast Asia",eu:"Europe",am:"Americas"}}
+};
+const MON_EN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+Object.assign(T.zh, {tabToday:"今天吃什么", tabAtlas:"食材图鉴", todayTitle:"今天吃什么",
+  todayIntro:(m,d)=>`${m}月${d}日 · 用这个月当季的食材，推荐 3 道在家就能做的家常菜。不想做哪道，点「换一个」。`,
+  swap:"换一个", open:"看做法 →", inSeason:n=>`当季 · ${n}`, back:"← 今天的推荐", food:"当季食材",
+  seasonM:ms=>`应季 ${ms.join("、")} 月`, seeAtlas:"在图鉴里看", noPool:"这个月暂时没有可推荐的当季家常菜。",
+  todayFoot:"应季月份以日本为准 · 推荐每天自动更新 · 数据内置，不联网也能用"});
+Object.assign(T.ja, {tabToday:"今日のごはん", tabAtlas:"食材ずかん", todayTitle:"今日なに作る？",
+  todayIntro:(m,d)=>`${m}月${d}日・今が旬の食材で作れる家庭料理を3品。気分じゃない料理は「ほかの料理」で入れ替えられます。`,
+  swap:"ほかの料理", open:"作り方を見る →", inSeason:n=>`旬・${n}`, back:"← 今日のおすすめ", food:"旬の食材",
+  seasonM:ms=>`旬 ${ms.join("・")}月`, seeAtlas:"ずかんで見る", noPool:"今月おすすめできる旬の家庭料理がまだありません。",
+  todayFoot:"旬は日本の時期が基準・おすすめは毎日自動で更新・データ内蔵でオフラインでも使えます"});
+Object.assign(T.en, {tabToday:"Cook today", tabAtlas:"Food Atlas", todayTitle:"What to cook today",
+  todayIntro:(m,d)=>`${MON_EN[m-1]} ${d} · Three home-style dishes made with what's in season this month. Not feeling one? Tap "Swap".`,
+  swap:"Swap", open:"See recipe →", inSeason:n=>`In season · ${n}`, back:"← Today's picks", food:"Seasonal ingredient",
+  seasonM:ms=>`In season: ${ms.map(m=>MON_EN[m-1]).join(", ")}`, seeAtlas:"Open in Food Atlas", noPool:"No seasonal home-style dishes to suggest this month yet.",
+  todayFoot:"Seasons follow Japan · picks refresh daily · built-in data, works offline"});
+let lang = "zh";
+try { const v = localStorage.getItem("lang"); if (T[v]) lang = v; } catch(e) {}
+const t = () => T[lang];
+// name of a food in the chosen language
+const nm = f => lang==="ja" ? f.ja : lang==="en" ? f.en : f.zh;
+// translated field of food / dish, falls back to Chinese
+const tr = (o, k) => (lang!=="zh" && o.i18n && o.i18n[lang] && o.i18n[lang][k] != null) ? o.i18n[lang][k] : o[k];
+const hasTr = o => lang==="zh" || !!(o.i18n && o.i18n[lang]);
+
+function setLang(l){
+  lang = l; try { localStorage.setItem("lang", l); } catch(e) {}
+  document.documentElement.lang = l==="zh" ? "zh-CN" : l;
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang===l));
+  $("#qlabel").textContent = t().qlabel; q.placeholder = t().ph;
+  $("#tabToday").textContent = t().tabToday; $("#tabAtlas").textContent = t().tabAtlas;
+  drawCats(); drawResults(); route(true);
+}
+function setHeader(view){
+  if (view === "atlas") {
+    $("#h1").innerHTML = `${esc(t().title)}<span class="ja">${esc(t().sub)}</span>`;
+    $("#intro").textContent = t().intro;
+    $("#foot").textContent = t().foot(F.length, F.filter(f => window.SEA.includes(f.cat)).length, F.reduce((n,f) => n + f.dishes.length, 0));
+  } else {
+    $("#h1").textContent = t().todayTitle;
+    $("#intro").textContent = t().todayIntro(NOW, TODAY.getDate());
+    $("#foot").textContent = t().todayFoot;
+  }
+  document.querySelectorAll("[data-tab]").forEach(a => a.setAttribute("aria-current", a.dataset.tab === (view==="atlas"?"atlas":"today") ? "page" : "false"));
+}
+document.querySelector(".lang").addEventListener("click", e => { const b = e.target.closest("[data-lang]"); if (b) setLang(b.dataset.lang); });
+
+// ---- search: normalize width/case, katakana→hiragana, romaji long vowels
+function norm(s){
+  return String(s).normalize("NFKC").toLowerCase()
+    .replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60))
+    .replace(/ou/g,"o").replace(/uu/g,"u").replace(/oo/g,"o").replace(/[\s・\-·]/g,"");
+}
+F.forEach(f => { f._keys = [f.zh, f.ja, f.kana, f.romaji, f.en, ...(f.aka||[])].map(norm); });
+function search(qs){
+  const n = norm(qs); if (!n) return [];
+  const out = [];
+  F.forEach(f => {
+    let s = 0;
+    f._keys.forEach((k, i) => {
+      const w = i < 5 ? 1 : .8;
+      if (k === n) s = Math.max(s, 100*w);
+      else if (k.startsWith(n)) s = Math.max(s, 60*w);
+      else if (k.includes(n) && n.length > 1) s = Math.max(s, 30*w);
+      else if (k.length > 1 && /[^\x00-\x7f]/.test(k) && n.includes(k)) s = Math.max(s, 20*w);
+    });
+    if (s) out.push([s, f]);
+  });
+  return out.sort((a,b) => b[0]-a[0]).slice(0, 8).map(x => x[1]);
+}
+
+// ---- search box
+let hits = [], sel = 0;
+const q = $("#q"), res = $("#results");
+function drawResults(){
+  if (!q.value.trim()) { res.hidden = true; return; }
+  hits = search(q.value); sel = 0; res.hidden = false;
+  res.innerHTML = hits.length ? hits.map((f,i) =>
+    `<button type="button" data-id="${f.id}" class="${i===sel?'on':''}"><span class="z">${esc(f.zh)}</span><span class="j">${esc(f.ja)}</span><span class="m">${esc(f.kana)}</span><span class="e">${esc(f.en)}</span></button>`
+  ).join("") : `<div class="empty">${esc(t().empty(q.value, F.length))}</div>`;
+}
+q.addEventListener("input", drawResults);
+q.addEventListener("keydown", e => {
+  if (!hits.length || res.hidden) return;
+  if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+    e.preventDefault(); sel = (sel + (e.key==="ArrowDown"?1:-1) + hits.length) % hits.length;
+    [...res.children].forEach((b,i) => b.classList.toggle("on", i===sel));
+  } else if (e.key === "Enter") { e.preventDefault(); open(hits[sel].id); }
+  else if (e.key === "Escape") { q.value = ""; res.hidden = true; }
+});
+res.addEventListener("click", e => { const b = e.target.closest("button[data-id]"); if (b) open(b.dataset.id); });
+
+// ---- browse
+let cat = "all";
+const catLabel = c => c==="all" ? t().allFoods : c==="now" ? t().now(NOW) : c==="sea" ? t().sea : t().cats[c];
+function drawCats(){
+  const items = [["all",t().all],["now",t().now(NOW)],["sea",t().sea],...Object.keys(window.CATS).map(k => [k, t().cats[k]])];
+  $("#cats").innerHTML = items.map(([k,v]) => `<button type="button" class="chip" data-c="${k}" aria-pressed="${k===cat}">${esc(v)}</button>`).join("");
+}
+$("#cats").addEventListener("click", e => {
+  const b = e.target.closest("[data-c]"); if (!b) return;
+  cat = b.dataset.c; drawCats(); drawGrid();
+  $("#shelfTitle").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+});
+function drawGrid(){
+  const list = F.filter(f => cat==="all" || (cat==="now" ? (f.season||[]).includes(NOW) : cat==="sea" ? window.SEA.includes(f.cat) : f.cat===cat));
+  $("#shelfTitle").textContent = `${catLabel(cat)} (${list.length})`;
+  $("#grid").innerHTML = list.map(f => {
+    const others = lang==="ja" ? [f.zh, f.en] : lang==="en" ? [f.zh, f.ja] : [`${f.ja}・${f.kana}`, f.en];
+    return `<button type="button" class="tile" data-id="${f.id}" aria-current="${f.id===cur}"><span class="z">${esc(nm(f))}</span><span class="j">${esc(others[0])}</span><span class="e">${esc(others[1])}</span></button>`;
+  }).join("");
+}
+$("#grid").addEventListener("click", e => { const b = e.target.closest("[data-id]"); if (b) { open(b.dataset.id); window.scrollTo({top:0, behavior:"auto"}); } });
+
+// ---- detail
+let cur = null, region = "all";
+function open(id){
+  if (location.hash !== "#" + id) location.hash = id; else show(id);
+}
+function show(id, keepRegion){
+  const f = byId[id] || byId.saba; cur = f.id; if (!keepRegion) region = "all";
+  q.value = ""; res.hidden = true;
+  const season = (f.season||[]);
+  const months = season.length
+    ? `<div><h3>${t().season}</h3><div class="months">${Array.from({length:12},(_,i)=>`<span class="${season.includes(i+1)?'in':''} ${i+1===NOW?'cur':''}">${i+1}</span>`).join("")}</div></div>`
+    : "";
+  const lines = {
+    zh:`<div class="ln zh"><span class="k">中文</span><span class="w">${esc(f.zh)}</span><button type="button" class="copy" data-copy="${esc(f.zh)}">${t().copy}</button></div>`,
+    ja:`<div class="ln ja"><span class="k">日本語</span><span class="w">${esc(f.ja)}</span><span class="kana">${esc(f.kana)} · ${esc(f.romaji)}</span><button type="button" class="copy" data-copy="${esc(f.ja)}">${t().copy}</button></div>`,
+    en:`<div class="ln en"><span class="k">English</span><span class="w">${esc(f.en)}</span><button type="button" class="copy" data-copy="${esc(f.en)}">${t().copy}</button></div>`
+  };
+  // chosen language first, large
+  const order = [lang, ...["zh","ja","en"].filter(l => l!==lang)];
+  const tip = tr(f,"tip"), warn = tr(f,"warn");
+  $("#detail").innerHTML = `
+    <div class="tag">
+      <div class="ribbon"><span class="pill">${esc(t().cats[f.cat])}</span>${season.includes(NOW)?`<span class="pill now">${t().nowPill}</span>`:""}${f.latin?`<span class="latin">${esc(f.latin)}</span>`:""}</div>
+      <div class="tri">${order.map((l,i) => lines[l].replace(`class="ln ${l}"`, `class="ln ${l}${i===0?" first":""}"`)).join("")}</div>
+      ${f.aka&&f.aka.length?`<p class="aka">${t().aka}${f.aka.map(esc).join(t().sep)}</p>`:""}
+    </div>
+    <div class="body">
+      ${(warn||tip)&&!hasTr(f)?`<p class="untrans">${t().untrans}</p>`:""}
+      ${warn?`<p class="note warn"><span class="lab">${t().warn}</span>${esc(warn)}</p>`:""}
+      ${tip?`<p class="note"><span class="lab">${t().tip}</span>${esc(tip)}</p>`:""}
+      ${months}
+      <div><h3>${t().dishes}</h3><div class="regions" id="regions"></div><div class="dishes" id="dishes"></div></div>
+    </div>`;
+  drawDishes(f); drawGrid();
+  document.title = `${nm(f)} · ${t().title}`;
+}
+// dish title in chosen language: translation, else local name for that cuisine, else Chinese
+function dishName(d){
+  if (lang==="zh") return [d.n, d.o!==d.n ? d.o : ""];
+  const n = tr(d,"n");
+  if (d.i18n && d.i18n[lang]) return [n, d.o!==n ? d.o : ""];
+  return [d.o, d.o!==d.n ? d.n : ""];
+}
+function drawDishes(f){
+  const rs = [...new Set(f.dishes.map(d => d.r))];
+  $("#regions").innerHTML = [["all",t().all],...rs.map(r=>[r,t().regions[r]])].map(([k,v]) =>
+    `<button type="button" class="chip" data-r="${k}" aria-pressed="${k===region}">${esc(v)}</button>`).join("");
+  $("#dishes").innerHTML = f.dishes.filter(d => region==="all" || d.r===region).map((d,i) => {
+    const [n1, n2] = dishName(d);
+    return `<details class="dish" ${i===0?"open":""}><summary><span class="rg">${esc(t().regions[d.r])}</span><span class="dn">${esc(n1)}</span>${n2?`<span class="dj">${esc(n2)}</span>`:""}${d.steps?`<span class="badge">${t().badge}</span>`:""}</summary>${!hasTr(d)?`<p class="untrans">${t().untrans}</p>`:""}${d.steps?fullRecipe(d):`<p>${esc(tr(d,"h"))}</p>`}</details>`;
+  }).join("");
+}
+function ingTable(rows, names){
+  return `<table class="ing"><tbody>${rows.map(([n,a,j],i) => {
+    const row = names && names[i] ? names[i] : [n,a];
+    const shop = j && lang!=="ja" ? `<span class="jn">${t().shop}${esc(j)}</span>` : "";
+    return `<tr><td>${esc(row[0])}${shop}</td><td>${esc(row[1])}</td></tr>`;
+  }).join("")}</tbody></table>`;
+}
+function fullRecipe(d){
+  const steps = tr(d,"steps"), tips = tr(d,"tips");
+  return `<div class="full">
+    <p class="lead">${esc(tr(d,"h"))}</p>
+    <div class="meta"><span><b>${t().serves}</b>${esc(tr(d,"serves"))}${t().servesU}</span><span><b>${t().time}</b>${esc(tr(d,"time"))}</span><span><b>${t().level}</b>${t().lv[d.level]||""}</span></div>
+    <div><h4>${t().ing}</h4>${ingTable(d.ing, tr(d,"ingT"))}</div>
+    ${d.sauce&&d.sauce.length?`<div><h4>${t().sauce}</h4>${ingTable(d.sauce, tr(d,"sauceT"))}</div>`:""}
+    <div><h4>${t().steps}</h4><ol class="steps">${steps.map(s=>`<li><span>${esc(s)}</span></li>`).join("")}</ol></div>
+    ${tips&&tips.length?`<div><h4>${t().tips}</h4><ul class="tips">${tips.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`:""}
+  </div>`;
+}
+$("#detail").addEventListener("click", e => {
+  const r = e.target.closest("[data-r]");
+  if (r) { region = r.dataset.r; drawDishes(byId[cur]); return; }
+  const c = e.target.closest("[data-copy]");
+  if (c) {
+    const x = c.dataset.copy;
+    navigator.clipboard?.writeText(x).then(() => toast(t().copied(x)), () => toast(x));
+  }
+});
+let tt; function toast(m){ const el=$("#toast"); el.textContent=m; el.hidden=false; clearTimeout(tt); tt=setTimeout(()=>el.hidden=true,1600); }
+
+// ---- 今天吃什么: home-style dishes made from foods in season this month
+// rule: food in season now, level 1–2, total time ≤ 1 hour, no multi-day prep, not on the NOT_HOME list (src/90-home.js)
+const NOT_HOME = new Set(window.NOT_HOME || []);
+function minutes(time){
+  const main = String(time).split("（")[0]; let m = 0;
+  const h = main.match(/([\d.]+)\s*小时/); if (h) m += parseFloat(h[1]) * 60;
+  const mm = main.match(/(\d+)\s*分钟/); if (mm) m += +mm[1];
+  return m;
+}
+const longPrep = time => /天|周|一夜|半天|晾/.test((String(time).match(/（(.*)）/) || [])[1] || "");
+const isHome = (f, d) => (f.season||[]).length && d.steps && d.level <= 2 && minutes(d.time) <= 60 && !longPrep(d.time) && !NOT_HOME.has(f.id + "|" + d.n);
+const POOL = F.filter(f => (f.season||[]).includes(NOW))
+  .flatMap(f => f.dishes.map((d, i) => isHome(f, d) ? f.id + "/" + i : null)).filter(Boolean);
+const dishOf = key => { const [fid, i] = key.split("/"); const f = byId[fid]; return f && f.dishes[+i] ? {f, d: f.dishes[+i], i: +i} : null; };
+const dayKey = `${TODAY.getFullYear()}-${NOW}-${TODAY.getDate()}`;
+
+// seeded random so the same day shows the same picks even without storage
+function rng(seed){ let a = 0; for (const c of seed) a = (a * 31 + c.charCodeAt(0)) | 0;
+  return () => { a = (a + 0x6D2B79F5) | 0; let x = Math.imul(a ^ (a >>> 15), 1 | a); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; }; }
+function pickOne(exclude, rand){
+  const usedFoods = new Set(exclude.picks.map(k => k.split("/")[0]));
+  let c = POOL.filter(k => !exclude.seen.includes(k) && !usedFoods.has(k.split("/")[0]));
+  if (!c.length) { exclude.seen = [...exclude.picks]; c = POOL.filter(k => !exclude.seen.includes(k) && !usedFoods.has(k.split("/")[0])); }
+  return c.length ? c[Math.floor(rand() * c.length)] : null;
+}
+let plan = null;
+function loadPlan(){
+  try { const p = JSON.parse(localStorage.getItem("today") || "null");
+    if (p && p.day === dayKey && Array.isArray(p.picks) && p.picks.every(k => POOL.includes(k))) return p; } catch(e) {}
+  const p = {day: dayKey, picks: [], seen: []}, rand = rng(dayKey);
+  for (let n = 0; n < 3; n++) { const k = pickOne(p, rand); if (!k) break; p.picks.push(k); p.seen.push(k); }
+  return p;
+}
+const savePlan = () => { try { localStorage.setItem("today", JSON.stringify(plan)); } catch(e) {} };
+function swap(slot){
+  const others = {picks: plan.picks.filter((_, i) => i !== slot), seen: plan.seen};
+  const k = pickOne(others, Math.random); if (!k) return;
+  plan.seen = others.seen.includes(k) ? others.seen : [...others.seen, k];
+  plan.picks[slot] = k; savePlan(); drawToday();
+}
+function drawToday(){
+  if (!plan) plan = loadPlan();
+  const lv = t().lv;
+  $("#todayView").innerHTML = plan.picks.length ? plan.picks.map((k, slot) => {
+    const x = dishOf(k); if (!x) return "";
+    const {f, d} = x, [n1, n2] = dishName(d);
+    return `<article class="rec">
+      <a class="rec-main" href="#dish/${k}">
+        <span class="rec-food">${esc(t().inSeason(nm(f)))}</span>
+        <span class="rec-name">${esc(n1)}</span>${n2 ? `<span class="rec-sub">${esc(n2)}</span>` : ""}
+        <span class="rec-lead">${esc(tr(d,"h"))}</span>
+        <span class="meta"><span><b>${t().time}</b>${esc(tr(d,"time"))}</span><span><b>${t().level}</b>${lv[d.level]||""}</span><span>${esc(t().regions[d.r])}</span></span>
+      </a>
+      <div class="rec-foot"><a class="go" href="#dish/${k}">${t().open}</a><button type="button" class="swap" data-slot="${slot}">${t().swap}</button></div>
+    </article>`;
+  }).join("") : `<p class="note">${t().noPool}</p>`;
+  document.title = `${t().todayTitle} · ${t().title}`;
+}
+$("#todayView").addEventListener("click", e => { const b = e.target.closest("[data-slot]"); if (b) swap(+b.dataset.slot); });
+
+function drawDish(key){
+  const x = dishOf(key); if (!x) { location.hash = "today"; return; }
+  const {f, d} = x, [n1, n2] = dishName(d), season = f.season || [];
+  $("#dishView").innerHTML = `<a class="back" href="#today">${t().back}</a>
+    <article class="card" style="margin-top:12px">
+      <div class="tag">
+        <div class="ribbon"><span class="rg">${esc(t().regions[d.r])}</span>${season.includes(NOW)?`<span class="pill now">${t().nowPill}</span>`:""}</div>
+        <div class="tri"><div class="ln first"><span class="w">${esc(n1)}</span></div></div>
+        ${n2 ? `<p class="aka">${esc(n2)}</p>` : ""}
+        <div class="foodline"><span><b>${t().food}：</b>${esc(nm(f))}（${esc(lang==="ja" ? f.kana : f.ja)}${lang==="en" ? "" : " · " + esc(f.en)}）</span>
+          ${season.length ? `<span class="small">${esc(t().seasonM(season))}</span>` : ""}
+          <a href="#${f.id}">${t().seeAtlas}</a></div>
+      </div>
+      <div class="body">${!hasTr(d)?`<p class="untrans">${t().untrans}</p>`:""}${fullRecipe(d)}</div>
+    </article>`;
+  document.title = `${n1} · ${t().title}`;
+}
+
+// ---- routing: #today (default) · #dish/<food>/<n> · #atlas · #<food>
+function route(keep){
+  const h = decodeURIComponent(location.hash.slice(1));
+  const view = h.startsWith("dish/") ? "dish" : (h === "atlas" || byId[h]) ? "atlas" : "today";
+  $("#todayView").hidden = view !== "today"; $("#dishView").hidden = view !== "dish"; $("#atlasView").hidden = view !== "atlas";
+  setHeader(view);
+  if (view === "today") drawToday();
+  else if (view === "dish") drawDish(h.slice(5));
+  else show(byId[h] ? h : (cur || "saba"), keep && byId[h] === byId[cur]);
+  if (!keep) window.scrollTo({top: 0, behavior: "auto"});
+}
+window.addEventListener("hashchange", () => route(false));
+setLang(lang);
+</script>
