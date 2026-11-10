@@ -225,18 +225,21 @@ const T = {
 };
 const MON_EN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 Object.assign(T.zh, {tabToday:"今天吃什么", tabAtlas:"食材图鉴", todayTitle:"今天吃什么",
-  todayIntro:(m,d)=>`${m}月${d}日 · 用这个月当季的食材，推荐 3 道在家就能做的家常菜。不想做哪道，点「换一个」。`,
-  swap:"换一个", open:"看做法 →", inSeason:n=>`当季 · ${n}`, back:"← 今天的推荐", food:"当季食材",
+  todayIntro:(m,d)=>`${m}月${d}日 · 用这个月当季的食材，推荐一道海鲜、一道肉菜、一道蔬菜，都是在家就能做的家常菜。不想做哪道，点「换一个」。`,
+  swap:"换一个", open:"看做法 →", inSeason:n=>`当季 · ${n}`, back:"← 今天的推荐", food:"主要食材",
+  meatL:n=>`家常肉菜 · ${n}`, withVeg:(n,v)=>`家常肉菜 · ${n} + 当季${v}`, vegL:n=>`当季蔬菜 · ${n}`, yearL:n=>`家常 · ${n}`,
   seasonM:ms=>`应季 ${ms.join("、")} 月`, seeAtlas:"在图鉴里看", noPool:"这个月暂时没有可推荐的当季家常菜。",
   todayFoot:"应季月份以日本为准 · 推荐每天自动更新 · 数据内置，不联网也能用"});
 Object.assign(T.ja, {tabToday:"今日のごはん", tabAtlas:"食材ずかん", todayTitle:"今日なに作る？",
-  todayIntro:(m,d)=>`${m}月${d}日・今が旬の食材で作れる家庭料理を3品。気分じゃない料理は「ほかの料理」で入れ替えられます。`,
-  swap:"ほかの料理", open:"作り方を見る →", inSeason:n=>`旬・${n}`, back:"← 今日のおすすめ", food:"旬の食材",
+  todayIntro:(m,d)=>`${m}月${d}日・旬の食材を使った魚介・肉・野菜の家庭料理を1品ずつ。気分じゃない料理は「ほかの料理」で入れ替えられます。`,
+  swap:"ほかの料理", open:"作り方を見る →", inSeason:n=>`旬・${n}`, back:"← 今日のおすすめ", food:"メインの食材",
+  meatL:n=>`肉のおかず・${n}`, withVeg:(n,v)=>`肉のおかず・${n}＋旬の${v}`, vegL:n=>`旬の野菜・${n}`, yearL:n=>`定番・${n}`,
   seasonM:ms=>`旬 ${ms.join("・")}月`, seeAtlas:"ずかんで見る", noPool:"今月おすすめできる旬の家庭料理がまだありません。",
   todayFoot:"旬は日本の時期が基準・おすすめは毎日自動で更新・データ内蔵でオフラインでも使えます"});
 Object.assign(T.en, {tabToday:"Cook today", tabAtlas:"Food Atlas", todayTitle:"What to cook today",
-  todayIntro:(m,d)=>`${MON_EN[m-1]} ${d} · Three home-style dishes made with what's in season this month. Not feeling one? Tap "Swap".`,
-  swap:"Swap", open:"See recipe →", inSeason:n=>`In season · ${n}`, back:"← Today's picks", food:"Seasonal ingredient",
+  todayIntro:(m,d)=>`${MON_EN[m-1]} ${d} · One seafood, one meat and one vegetable dish — home-style and built around what's in season. Not feeling one? Tap "Swap".`,
+  swap:"Swap", open:"See recipe →", inSeason:n=>`In season · ${n}`, back:"← Today's picks", food:"Main ingredient",
+  meatL:n=>`Meat dish · ${n}`, withVeg:(n,v)=>`Meat dish · ${n} + seasonal ${v}`, vegL:n=>`Seasonal veg · ${n}`, yearL:n=>`Everyday · ${n}`,
   seasonM:ms=>`In season: ${ms.map(m=>MON_EN[m-1]).join(", ")}`, seeAtlas:"Open in Food Atlas", noPool:"No seasonal home-style dishes to suggest this month yet.",
   todayFoot:"Seasons follow Japan · picks refresh daily · built-in data, works offline"});
 let lang = "zh";
@@ -418,8 +421,8 @@ $("#detail").addEventListener("click", e => {
 });
 let tt; function toast(m){ const el=$("#toast"); el.textContent=m; el.hidden=false; clearTimeout(tt); tt=setTimeout(()=>el.hidden=true,1600); }
 
-// ---- 今天吃什么: home-style dishes made from foods in season this month
-// rule: food in season now, level 1–2, total time ≤ 1 hour, no multi-day prep, not on the NOT_HOME list (src/90-home.js)
+// ---- 今天吃什么: one seasonal seafood dish + one meat dish + one vegetable dish, all home-style
+// home-style rule: level 1–2, total time ≤ 1 hour, no multi-day prep, not on the NOT_HOME list (src/90-home.js)
 const NOT_HOME = new Set(window.NOT_HOME || []);
 function minutes(time){
   const main = String(time).split("（")[0]; let m = 0;
@@ -428,45 +431,63 @@ function minutes(time){
   return m;
 }
 const longPrep = time => /天|周|一夜|半天|晾/.test((String(time).match(/（(.*)）/) || [])[1] || "");
-const isHome = (f, d) => (f.season||[]).length && d.steps && d.level <= 2 && minutes(d.time) <= 60 && !longPrep(d.time) && !NOT_HOME.has(f.id + "|" + d.n);
-const POOL = F.filter(f => (f.season||[]).includes(NOW))
-  .flatMap(f => f.dishes.map((d, i) => isHome(f, d) ? f.id + "/" + i : null)).filter(Boolean);
-const dishOf = key => { const [fid, i] = key.split("/"); const f = byId[fid]; return f && f.dishes[+i] ? {f, d: f.dishes[+i], i: +i} : null; };
+const isHome = (f, d) => d.steps && d.level <= 2 && minutes(d.time) <= 60 && !longPrep(d.time) && !NOT_HOME.has(f.id + "|" + d.n);
+const inSeasonNow = f => (f.season||[]).includes(NOW);
+const VEG_CATS = ["veg", "mush", "soy"];
+// vegetables in season now; a meat dish that uses one of them is preferred
+// leeks are only an aromatic in most meat dishes, so they don't count
+const SEASON_VEG = F.filter(f => VEG_CATS.includes(f.cat) && inSeasonNow(f) && f.id !== "negi");
+const seasonalVegOf = d => SEASON_VEG.find(v => d.ing.some(r => r[0].includes(v.zh) || (r[2] && r[2].includes(v.ja))));
+// slot rules: which foods count, and how strongly each dish is weighted
+const SLOTS = [
+  {k: "sea",  food: f => window.SEA.includes(f.cat) && inSeasonNow(f), w: () => 1},
+  {k: "meat", food: f => f.cat === "meat", w: d => seasonalVegOf(d) ? 4 : 1},
+  {k: "veg",  food: f => VEG_CATS.includes(f.cat) && (inSeasonNow(f) || !(f.season||[]).length), w: (d, f) => inSeasonNow(f) ? 3 : 1}
+];
+const POOLS = SLOTS.map(s => F.filter(s.food).flatMap(f => f.dishes.map((d, i) => isHome(f, d) ? {key: f.id + "/" + i, w: s.w(d, f)} : null)).filter(Boolean));
+const dishOf = key => { const [fid, i] = String(key).split("/"); const f = byId[fid]; return f && f.dishes[+i] ? {f, d: f.dishes[+i], i: +i} : null; };
 const dayKey = `${TODAY.getFullYear()}-${NOW}-${TODAY.getDate()}`;
 
 // seeded random so the same day shows the same picks even without storage
 function rng(seed){ let a = 0; for (const c of seed) a = (a * 31 + c.charCodeAt(0)) | 0;
   return () => { a = (a + 0x6D2B79F5) | 0; let x = Math.imul(a ^ (a >>> 15), 1 | a); x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x; return ((x ^ (x >>> 14)) >>> 0) / 4294967296; }; }
-function pickOne(exclude, rand){
-  const usedFoods = new Set(exclude.picks.map(k => k.split("/")[0]));
-  let c = POOL.filter(k => !exclude.seen.includes(k) && !usedFoods.has(k.split("/")[0]));
-  if (!c.length) { exclude.seen = [...exclude.picks]; c = POOL.filter(k => !exclude.seen.includes(k) && !usedFoods.has(k.split("/")[0])); }
-  return c.length ? c[Math.floor(rand() * c.length)] : null;
+function pickOne(slot, plan, rand){
+  const usedFoods = new Set(plan.picks.filter((k, i) => k && i !== slot).map(k => k.split("/")[0]));
+  const ok = seenOk => POOLS[slot].filter(x => x.key !== plan.picks[slot] && !usedFoods.has(x.key.split("/")[0]) && (seenOk || !plan.seen.includes(x.key)));
+  let c = ok(false);
+  if (!c.length) { plan.seen = plan.seen.filter(k => !POOLS[slot].some(x => x.key === k)); c = ok(false); }
+  if (!c.length) return plan.picks[slot] || null;
+  let r = rand() * c.reduce((n, x) => n + x.w, 0);
+  for (const x of c) { r -= x.w; if (r <= 0) return x.key; }
+  return c[c.length - 1].key;
 }
 let plan = null;
 function loadPlan(){
-  try { const p = JSON.parse(localStorage.getItem("today") || "null");
-    if (p && p.day === dayKey && Array.isArray(p.picks) && p.picks.every(k => POOL.includes(k))) return p; } catch(e) {}
-  const p = {day: dayKey, picks: [], seen: []}, rand = rng(dayKey);
-  for (let n = 0; n < 3; n++) { const k = pickOne(p, rand); if (!k) break; p.picks.push(k); p.seen.push(k); }
+  try { const p = JSON.parse(localStorage.getItem("today2") || "null");
+    if (p && p.day === dayKey && Array.isArray(p.picks) && p.picks.length === SLOTS.length && p.picks.every((k, i) => !k || POOLS[i].some(x => x.key === k))) return p; } catch(e) {}
+  const p = {day: dayKey, picks: SLOTS.map(() => null), seen: []}, rand = rng(dayKey);
+  SLOTS.forEach((_, i) => { const k = pickOne(i, p, rand); p.picks[i] = k; if (k) p.seen.push(k); });
   return p;
 }
-const savePlan = () => { try { localStorage.setItem("today", JSON.stringify(plan)); } catch(e) {} };
+const savePlan = () => { try { localStorage.setItem("today2", JSON.stringify(plan)); } catch(e) {} };
 function swap(slot){
-  const others = {picks: plan.picks.filter((_, i) => i !== slot), seen: plan.seen};
-  const k = pickOne(others, Math.random); if (!k) return;
-  plan.seen = others.seen.includes(k) ? others.seen : [...others.seen, k];
-  plan.picks[slot] = k; savePlan(); drawToday();
+  const k = pickOne(slot, plan, Math.random); if (!k || k === plan.picks[slot]) return;
+  plan.picks[slot] = k; plan.seen.push(k); savePlan(); drawToday();
+}
+function recLabel(slot, f, d){
+  if (SLOTS[slot].k === "sea") return t().inSeason(nm(f));
+  if (SLOTS[slot].k === "meat") { const v = seasonalVegOf(d); return v ? t().withVeg(nm(f), nm(v)) : t().meatL(nm(f)); }
+  return inSeasonNow(f) ? t().vegL(nm(f)) : t().yearL(nm(f));
 }
 function drawToday(){
   if (!plan) plan = loadPlan();
   const lv = t().lv;
-  $("#todayView").innerHTML = plan.picks.length ? plan.picks.map((k, slot) => {
+  $("#todayView").innerHTML = plan.picks.some(Boolean) ? plan.picks.map((k, slot) => {
     const x = dishOf(k); if (!x) return "";
     const {f, d} = x, [n1, n2] = dishName(d);
     return `<article class="rec">
       <a class="rec-main" href="#dish/${k}">
-        <span class="rec-food">${esc(t().inSeason(nm(f)))}</span>
+        <span class="rec-food">${esc(recLabel(slot, f, d))}</span>
         <span class="rec-name">${esc(n1)}</span>${n2 ? `<span class="rec-sub">${esc(n2)}</span>` : ""}
         <span class="rec-lead">${esc(tr(d,"h"))}</span>
         <span class="meta"><span><b>${t().time}</b>${esc(tr(d,"time"))}</span><span><b>${t().level}</b>${lv[d.level]||""}</span><span>${esc(t().regions[d.r])}</span></span>
